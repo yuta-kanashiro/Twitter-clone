@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'account_name',
+        'user_name',
         'email',
         'password',
+        'introduction',
+        'profile_image',
     ];
 
     /**
@@ -41,4 +44,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ユーザーが投稿したツイートの取得
+     */
+    public function tweets()
+    {
+        return $this->hasMany(Tweet::class);
+    }
+
+    /**
+     * ユーザーが投稿したコメントの取得
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
