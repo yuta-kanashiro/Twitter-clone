@@ -20,6 +20,7 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
+                <!-- ヘッダーに各リンクを残す可能性があるので、一応残しています。 -->
                     {{-- @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
