@@ -21,4 +21,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// 後ほど使う可能性があるので残しています
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
