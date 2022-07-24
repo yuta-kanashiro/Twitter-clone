@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'user_name' => 'sample1sample1',
                 'email' => 'sample1@sample.com',
                 'password' => bcrypt('sample1sample1'),
-                'introduction' => 'みなさんこんにちは。僕の名前はsample1です。この文章は自己紹介のサンプルです。',
+                'profile_text' => 'みなさんこんにちは。僕の名前はsample1です。この文章は自己紹介のサンプルです。',
                 'profile_image' => null,
                 'remember_token' => Str::random(10),
             ],
