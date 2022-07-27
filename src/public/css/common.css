@@ -1,0 +1,26 @@
+.register-btn{
+    display: block;
+    width: 300px;
+    padding: 15px 0;
+    margin: auto;
+    background: #23aee6;
+    text-decoration: none;
+    text-align: center;
+}
+.register-btn:hover{
+    background: #1e98c8;
+}
+
+.login-btn{
+    display: block;
+    width: 300px;
+    padding: 15px 0;
+    margin: auto;
+    border: solid 1px;
+    border-color: rgb(170, 168, 168);
+    text-decoration: none;
+    text-align: center;
+}
+.login-btn:hover{
+    background: #dfeef4de;
+}

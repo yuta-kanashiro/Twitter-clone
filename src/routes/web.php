@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ホーム画面表示（ツイート一覧画面）
 Route::get('/', function () {
-    return view('welcome');
+    return view('tweets.top');
 });
+
+Auth::routes();
+
+// 後ほど使う可能性があるので残しています
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
