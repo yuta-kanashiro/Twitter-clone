@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,5 +28,9 @@
         <div class="mt-5">
             @yield('content')
         </div>
+
+        <SampleComponent></SampleComponent>
+    </div>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 </html>
