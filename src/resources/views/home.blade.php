@@ -1,23 +1,39 @@
 @extends('layouts.app')
 
+@section('title', 'ホーム画面')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+@guest
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-body text-center mt-5">
+                        <div class="mb-5">
+                            <h1 class="font-weight-bold">Twitterクローンへようこそ。</h1>
                         </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                        <div class="mb-5">
+                            <h3>Twitterクローンを始めよう</h3>
+                            <a href="{{ route('register') }}" class="register-btn rounded-pill mt-3 text-white">
+                                メールアドレスで新規登録
+                            </a>
+                        </div>
+                        <div>
+                            <h5>アカウントをお持ちの場合</h5>
+                            <a href="{{ route('login') }}" class="login-btn rounded-pill my-3 text-info">
+                                ログイン
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endguest
+
+@auth
+    <div id='app'></div>
+@endauth
+
 @endsection

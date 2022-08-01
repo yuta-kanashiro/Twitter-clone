@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 // ホーム画面表示（ツイート一覧画面）
 Route::get('/', function () {
-    return view('tweets.top');
+    return view('home');
 });
 
 Auth::routes();
