@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import exampleComponent from './components/ExampleComponent.vue'
+import UserListComponent from './components/UserListComponent.vue'
 
 const routes = [
-    { path: '/', name: 'home', component: exampleComponent },
+    { path: '/', name: 'home', component: UserListComponent },
 ]
 
 const router = createRouter({
+    // Historyモードって必要？ 聞いてみる
     history: createWebHistory(), // HTML5 History モード
     routes,
 })
