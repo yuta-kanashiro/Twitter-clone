@@ -7,7 +7,6 @@ const routes = [
 ]
 
 const router = createRouter({
-    // Historyモードって必要？ 聞いてみる
     history: createWebHistory(), // HTML5 History モード
     routes,
 })

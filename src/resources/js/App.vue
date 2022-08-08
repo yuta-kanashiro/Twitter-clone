@@ -6,9 +6,8 @@
 </template>
 
 <script>
-// import navbarComponent from './components/NavbarComponent.vue'
 
 export default {
-    // components: { navbarComponent }
+    // 
 };
 </script>
