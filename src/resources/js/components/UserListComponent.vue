@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <!-- <router-link> -->
-                    <div class="card" v-for="user in users" v-bind:key="user.id">
-                        <div class="card-body d-flex" style="gap:0 12px">
+                <div class="card" v-for="user in users" v-bind:key="user.id">
+                    <router-link :to="'/' + user.user_name + '/' + user.id" class="router-link">
+                        <div class="card-body d-flex text-black" style="gap:0 12px">
                             <div>
                                 <div v-if="user.profile_image === null">
                                     <img class="rounded-circle" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
@@ -19,8 +19,8 @@
                                 <text size="3">{{ user.profile_text}}</text>
                             </div>
                         </div>
-                    </div>
-                <!-- </router-link> -->
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +35,8 @@ export default {
         const users = ref([]);
 
         const getUserList = async() => {
-            const response = await axios.get('/api')
+            const response = await axios.get('/api/users_list')
+            // ユーザー一覧取得
             users.value = response.data
         }
 
@@ -43,7 +44,6 @@ export default {
 
         return{
             users,
-            // getUserList // これを返す意味ってなに？
         }
     }
 }

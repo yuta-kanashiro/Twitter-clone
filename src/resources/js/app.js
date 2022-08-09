@@ -1,4 +1,4 @@
-// require('./bootstrap');  // これっている？多分今は使ってない気がする。Vueのバージョンの違い？
+require('./bootstrap'); 
 
 import { createApp } from 'vue'
 import App from './App.vue';

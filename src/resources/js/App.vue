@@ -11,3 +11,8 @@ export default {
     // 
 };
 </script>
+<style>
+.router-link {
+    text-decoration: none;
+}
+</style>
