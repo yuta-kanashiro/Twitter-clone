@@ -14,9 +14,9 @@
                                 </div>
                             </div>
                             <div>
-                                <b>{{ user.account_name}}</b><br>
-                                <text class="text-muted">@{{ user.user_name}}</text><br>
-                                <text size="3">{{ user.profile_text}}</text>
+                                <b class="d-block">{{ user.account_name }}</b>
+                                <span class="d-blocck text-muted">@{{ user.user_name }}</span>
+                                <span class="d-block">{{ user.profile_text }}</span>
                             </div>
                         </div>
                     </router-link>
