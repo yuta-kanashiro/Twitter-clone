@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import UserListComponent from './components/UserListComponent.vue'
+import UserList from './components/UserList'
 
 const routes = [
-    { path: '/', name: 'home', component: UserListComponent },
+    { path: '/', name: 'home', component: UserList },
 ]
 
 const router = createRouter({
