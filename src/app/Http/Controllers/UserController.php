@@ -10,7 +10,7 @@ class UserController extends Controller
     /**
     * 全ユーザー情報の取得
     * 
-    * @param  App\UseCase\User\IndexUseCase $useCase
+    * @param  IndexUseCase $useCase
     * @return object
     */
     public function index(IndexUseCase $useCase): object
