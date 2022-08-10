@@ -15,6 +15,6 @@ class UserController extends Controller
     */
     public function index(IndexUseCase $useCase): object
     {
-        return $useCase->getUserList();
+        return $useCase->getAllUsers();
     }
 }

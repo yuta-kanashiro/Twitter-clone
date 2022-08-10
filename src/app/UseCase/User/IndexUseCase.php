@@ -11,7 +11,7 @@ final class IndexUseCase
     * 
     * @return object
     */
-    public function getUserList(): object
+    public function getAllUsers(): object
     {
         $users = User::orderBy('created_at', 'desc')->get();
 
