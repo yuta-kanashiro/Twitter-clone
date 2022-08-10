@@ -6,12 +6,12 @@ use App\Models\User;
 use Collator;
 use Illuminate\Support\Collection;
 
-final class IndexUseCase
+final class Index
 {
     /**
     * 全ユーザー情報の取得
     * 
-    * @return object
+    * @return Collection
     */
     public function getAllUsers(): Collection
     {
