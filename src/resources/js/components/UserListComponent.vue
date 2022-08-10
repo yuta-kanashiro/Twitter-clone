@@ -34,9 +34,9 @@ export default {
     setup(){
         const users = ref([]);
 
+        // ユーザー一覧取得
         const getUserList = async() => {
-            const response = await axios.get('/api/users_list')
-            // ユーザー一覧取得
+            const response = await axios.get('/api/usersList')
             users.value = response.data
         }
 

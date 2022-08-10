@@ -18670,7 +18670,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
-    var users = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
+    var users = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]); // ユーザー一覧取得
 
     var getUserList = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18680,11 +18680,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users_list');
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/usersList');
 
               case 2:
                 response = _context.sent;
-                // ユーザー一覧取得
                 users.value = response.data;
 
               case 4:

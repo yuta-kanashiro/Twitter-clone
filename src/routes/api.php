@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth')->group(function () {
     // ユーザー一覧取得
-    Route::get('/users_list', [UserController::class, 'index']);
+    Route::get('/usersList', [UserController::class, 'index']);
 });
