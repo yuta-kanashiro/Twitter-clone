@@ -3,6 +3,8 @@
 namespace App\UseCase\User;
 
 use App\Models\User;
+use Collator;
+use Illuminate\Support\Collection;
 
 final class IndexUseCase
 {
@@ -11,7 +13,7 @@ final class IndexUseCase
     * 
     * @return object
     */
-    public function getAllUsers(): object
+    public function getAllUsers(): Collection
     {
         $users = User::orderBy('created_at', 'desc')->get();
 

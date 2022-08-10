@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UseCase\User\IndexUseCase;
-use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class UserController extends Controller
 {
@@ -13,7 +13,7 @@ class UserController extends Controller
     * @param  IndexUseCase $useCase
     * @return object
     */
-    public function index(IndexUseCase $useCase): object
+    public function index(IndexUseCase $useCase): Collection
     {
         return $useCase->getAllUsers();
     }
