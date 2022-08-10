@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
+use App\UseCase\Tweet\GetUserTweetUseCase;
 use App\UseCase\User\IndexUseCase;
+use App\UseCase\User\ShowUseCase;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,9 +17,9 @@ class UserController extends Controller
     * @param  IndexUseCase $useCase
     * @return object
     */
-    public function index(IndexUseCase $useCase): object
+    public function index(IndexUseCase $indexUseCase): object
     {
-        return $useCase->getUserList();
+        return $indexUseCase->getUserList();
     }
 
     /**
@@ -30,14 +34,22 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * あるユーザーの情報の取得
      *
+     * 
+     * @param ShowUseCase $useCase
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function show($id)
+    public function show(ShowUseCase $showUseCase, GetUserTweetUseCase $getUserTweetUseCase, int $id)
     {
-        //
+        $user = $showUseCase->show($id);
+        $tweets = $getUserTweetUseCase->show($id);
+
+        return [
+            'user' => $user,
+            'tweets' => $tweets
+        ];
     }
 
     /**
