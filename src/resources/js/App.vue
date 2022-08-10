@@ -1,7 +1,5 @@
 <template>
     <div class="main">
-        <!-- 現状はヘッダーはBlade, 最後にVueに置き換える -->
-        <!-- <navbar-component></navbar-component>  -->
         <router-view></router-view>
     </div>
 </template>
