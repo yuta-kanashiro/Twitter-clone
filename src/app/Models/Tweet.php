@@ -15,6 +15,14 @@ class Tweet extends Model
     ];
     
     /**
+     * ツイートを保持するユーザーを取得
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * ツイートに対するコメントの取得
      */
     public function comments()
