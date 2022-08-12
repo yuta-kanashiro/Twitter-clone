@@ -3,15 +3,16 @@
 namespace App\UseCase\User;
 
 use App\Models\User;
+use Illuminate\Support\Collection;
 
-final class IndexUseCase
+final class IndexAction
 {
     /**
     * 全ユーザー情報の取得
     * 
-    * @return object
+    * @return Collection
     */
-    public function getUserList(): object
+    public function getAllUsers(): Collection
     {
         $users = User::orderBy('created_at', 'desc')->get();
 

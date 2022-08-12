@@ -2,35 +2,22 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\User;
 use App\UseCase\Tweet\GetUserTweetUseCase;
-use App\UseCase\User\IndexUseCase;
+use App\UseCase\User\IndexAction;
 use App\UseCase\User\ShowUseCase;
-use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class UserController extends Controller
 {
     /**
     * 全ユーザー情報の取得
     * 
-    * @param  IndexUseCase $useCase
-    * @return object
+    * @param  IndexAction $useCase
+    * @return Collection
     */
-    public function index(IndexUseCase $indexUseCase): object
+    public function index(IndexAction $useCase): Collection
     {
-        return $indexUseCase->getUserList();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return $useCase->getAllUsers();
     }
 
     /**
@@ -50,28 +37,5 @@ class UserController extends Controller
             'user' => $user,
             'tweets' => $tweets
         ];
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
