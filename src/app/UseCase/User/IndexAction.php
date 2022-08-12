@@ -3,10 +3,9 @@
 namespace App\UseCase\User;
 
 use App\Models\User;
-use Collator;
 use Illuminate\Support\Collection;
 
-final class Index
+final class IndexAction
 {
     /**
     * 全ユーザー情報の取得
