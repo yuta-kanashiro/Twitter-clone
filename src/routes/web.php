@@ -14,12 +14,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// ホーム画面表示（ツイート一覧画面）
-Route::get('/', function () {
-    return view('tweets.top');
-});
-
 Auth::routes();
 
-// 後ほど使う可能性があるので残しています
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/{any}', function () {
+    return view('home');
+})->where('any', '.*');

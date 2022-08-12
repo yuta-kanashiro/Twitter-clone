@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -21,12 +18,12 @@
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        
-        @include('header')
+    @include('header')
 
-        <div class="mt-5">
-            @yield('content')
-        </div>
+    <div class="mt-5">
+        @yield('content')
+    </div>
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 </html>
