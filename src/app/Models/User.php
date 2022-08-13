@@ -46,6 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    # リレーション
     /**
      * ユーザーが投稿したツイートの取得
      */
@@ -62,6 +63,23 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * あるユーザーがフォローしているユーザーのIDを取得
+     */
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'follow', 'following_id', 'follower_id')->withTimestamps();
+    }
+
+    /**
+     * あるユーザーをフォローしているユーザーのIDを取得
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follow', 'follower_id', 'following_id')->withTimestamps();
+    }
+
+    # ユーザーに関する処理
     /**
     * 全ユーザー情報の取得(ユーザー一覧画面)
     * 
@@ -81,5 +99,47 @@ class User extends Authenticatable
     public function getUserInfo(int $id): object
     {
         return $this->with('tweets')->find($id);
+    }
+
+    # フォローに関する処理
+    /**
+     * フォロー判定
+     */
+    public function isFollowing($followUserId)
+    {
+        // フォロー対象のユーザID（$followUserId）が、すでにフォローしているfollower_idと重複していないかどうかを判定
+        return $this->followings()->where('follower_id', $followUserId)->exists();
+    }
+
+    /**
+     * フォロー処理
+     */
+    public function follow($followUserId)
+    {
+        $this->followings()->attach($followUserId);
+    }
+
+    /**
+     * フォローを外す処理
+     */
+    public function unfollow($followUserId)
+    {
+        $this->followings()->detach($followUserId);
+    }
+
+    /**
+     * フォロー数カウント
+     */
+    public function countFollowings()
+    {
+        return $this->followings()->count();
+    }
+
+    /**
+     * フォロワー数カウント
+     */
+    public function countFollowers()
+    {
+        return $this->followers()->count();
     }
 }

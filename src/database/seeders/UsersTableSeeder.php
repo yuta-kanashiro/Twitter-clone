@@ -29,5 +29,27 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::factory()->count(50)->create(); 
+
+        // 中間テーブル（followテーブル）のダミーデータ作成
+        $followingUsers = User::all();
+
+        foreach($followingUsers as $followingUser){
+            // 1~20までの数値をランダムで取得
+            $ran = rand(1, 20);
+            // Userモデルからランダムで1~20件取得
+            $followerUsers = User::inRandomOrder()->take($ran)->get();
+
+            foreach($followerUsers as $followerUser){
+                // すでにフォロー済みではないか？
+                $existing = $followingUser->isFollowing($followerUser->id);
+                // フォローする相手がユーザ自身ではないか？
+                $myself = $followingUser->id === $followerUser->id;
+
+                // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
+                if (!$existing && !$myself){
+                    $followingUser->follow($followerUser->id);
+                }
+            }
+        }
     }
 }
