@@ -18758,7 +18758,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
 
               case 2:
                 response = _context.sent;
-                user.value = response.data.user;
+                user.value = response.data;
                 tweets.value = response.data.tweets;
 
               case 5:

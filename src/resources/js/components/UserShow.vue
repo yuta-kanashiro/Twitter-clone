@@ -79,7 +79,7 @@ export default {
         // あるユーザーの情報を取得
         const getProfileData = async() => {
             const response = await axios.get('/api/userProfile/' + id.value)
-            user.value = response.data.user
+            user.value = response.data
             tweets.value = response.data.tweets
         }
 

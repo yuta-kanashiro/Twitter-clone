@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -59,5 +60,26 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+    * 全ユーザー情報の取得(ユーザー一覧画面)
+    * 
+    * @return Collection
+    */
+    public function getAllUsers(): Collection
+    {
+        return $this->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+    * あるユーザー情報の取得（ユーザー詳細画面）
+    *
+    * @param int $id
+    * @return object
+    */
+    public function getUserInfo(int $id): object
+    {
+        return $this->with('tweets')->find($id);
     }
 }

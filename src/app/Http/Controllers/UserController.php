@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\UseCase\Tweet\GetUserTweetUseCase;
-use App\UseCase\User\IndexAction;
-use App\UseCase\User\ShowUseCase;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class UserController extends Controller
@@ -12,30 +10,23 @@ class UserController extends Controller
     /**
     * 全ユーザー情報の取得
     * 
-    * @param  IndexAction $useCase
+    * @param  User $user
     * @return Collection
     */
-    public function index(IndexAction $useCase): Collection
+    public function index(User $user): Collection
     {
-        return $useCase->getAllUsers();
+        return $user->getAllUsers();
     }
 
     /**
      * あるユーザーの情報の取得
      *
-     * 
-     * @param ShowUseCase $useCase
+     * @param User $user
      * @param  int  $id
-     * @return array
+     * @return object
      */
-    public function show(ShowUseCase $showUseCase, GetUserTweetUseCase $getUserTweetUseCase, int $id)
+    public function show(User $user, int $id): object
     {
-        $user = $showUseCase->show($id);
-        $tweets = $getUserTweetUseCase->show($id);
-
-        return [
-            'user' => $user,
-            'tweets' => $tweets
-        ];
+        return $user->getUserInfo($id);
     }
 }
