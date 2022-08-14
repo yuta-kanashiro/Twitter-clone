@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable
 {
@@ -101,11 +102,11 @@ class User extends Authenticatable
         return $this->with('tweets')->find($id);
     }
 
-    # フォローに関する処理
+    // # フォローに関する処理
     /**
      * フォロー判定
      */
-    public function isFollowing($followUserId)
+    public function followCheck($followUserId): bool
     {
         // フォロー対象のユーザID（$followUserId）が、すでにフォローしているfollower_idと重複していないかどうかを判定
         return $this->followings()->where('follower_id', $followUserId)->exists();

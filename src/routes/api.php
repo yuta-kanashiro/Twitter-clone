@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,4 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/usersList', [UserController::class, 'index']);
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
+    // フォローチェック
+    Route::get('/followCheck/{id}', [FollowController::class, 'followCheck']);
+    // フォローする
+    Route::get('/follow/{id}', [FollowController::class, 'follow']);
+    // フォローを外す
+    Route::get('/unfollow/{id}', [FollowController::class, 'unfollow']);
 });
