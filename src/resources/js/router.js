@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import UserList from './components/UserList'
-import UserShow from './components/UserShow'
+import UserListShow from './components/UserListShow'
 
 const routes = [
     { path: '/', name: 'home', component: UserList },
-    { path: '/user-profile/:id', name: 'userProfile', component: UserShow, props: true },
+    { path: '/user-profile/:id', name: 'userProfile', component: UserListShow, props: true },
 ]
 
 const router = createRouter({

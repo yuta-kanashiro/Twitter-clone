@@ -31,19 +31,19 @@
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
                         </div>
-                        <!-- <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link"> -->
+                        <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link">
                             <div class="d-flex mt-2">
                                 <div>1<span class="text-muted me-1">フォロー</span></div>
                                 <div>1<span class="text-muted">フォロワー</span></div>
                             </div>
-                        <!-- </router-link> -->
+                        </router-link>
                     </div>
                 </div>
                 
                 <!-- ツイート一覧 -->
                 <div class="card">
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
-                        <!-- <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex"> -->
+                        <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex">
                             <div class="me-2">
                                 <div v-if="user.profile_image === null">
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
@@ -58,7 +58,7 @@
                                 <span class="text-muted float-end ">{{ format(tweet.created_at) }}</span>
                                 <span class="d-block">{{ tweet.text }}</span>
                             </div>
-                        <!-- </router-link> -->
+                        </router-link>
                     </div>
                 </div>
             </div>
