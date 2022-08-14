@@ -20,24 +20,30 @@
                                     <span class="d-block text-muted mb-2">@{{ user.user_name }}</span>
                                 </div>
                                 <div class="ms-auto">
-                                    <button type="button" class="btn btn-info text-white rounded-pill">フォロー</button>
+                                    <div v-if="loginUserId === user.id">
+                                        <button type="button" class="btn btn-outline-dark rounded-pill">編集</button>
+                                    </div>
+                                    <div v-else>
+                                        <FollowButton :id="user.id"/>
+                                    </div>
+
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
                         </div>
-                        <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link">
+                        <!-- <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link"> -->
                             <div class="d-flex mt-2">
                                 <div>1<span class="text-muted me-1">フォロー</span></div>
                                 <div>1<span class="text-muted">フォロワー</span></div>
                             </div>
-                        </router-link>
+                        <!-- </router-link> -->
                     </div>
                 </div>
                 
                 <!-- ツイート一覧 -->
                 <div class="card">
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
-                        <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex">
+                        <!-- <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex"> -->
                             <div class="me-2">
                                 <div v-if="user.profile_image === null">
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
@@ -52,7 +58,7 @@
                                 <span class="text-muted float-end ">{{ format(tweet.created_at) }}</span>
                                 <span class="d-block">{{ tweet.text }}</span>
                             </div>
-                        </router-link>
+                        <!-- </router-link> -->
                     </div>
                 </div>
             </div>
@@ -63,24 +69,30 @@
 <script>
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
+import FollowButton from './FollowButton.vue';
 import dayjs from "dayjs";
 dayjs.locale("ja");
 
 export default {
+    components: {
+        FollowButton
+    },
     props: {
         id: String
     },
     setup(props) {
         const user = ref([]);
         const tweets = ref([]);
+        const loginUserId = ref();
         // Numberでidを文字列から数値に変換
         const id = ref(Number(props.id));
 
         // あるユーザーの情報を取得
         const getProfileData = async() => {
             const response = await axios.get('/api/userProfile/' + id.value)
-            user.value = response.data
-            tweets.value = response.data.tweets
+            user.value = response.data.user
+            tweets.value = response.data.user.tweets
+            loginUserId.value = response.data.loginUserId
         }
 
         // 日付のフォーマット
@@ -94,6 +106,7 @@ export default {
         return{
             user,
             tweets,
+            loginUserId,
             format
         }
     }

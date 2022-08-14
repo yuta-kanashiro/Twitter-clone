@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -23,10 +24,16 @@ class UserController extends Controller
      *
      * @param User $user
      * @param  int  $id
-     * @return object
+    //  * @return object
      */
-    public function show(User $user, int $id): object
+    public function show(User $user, int $id): array
     {
-        return $user->getUserInfo($id);
+        $loginUserId = Auth::id();
+        $user = $user->getUserInfo($id);
+
+        return [
+            'loginUserId' => $loginUserId,
+            'user' => $user
+        ];
     }
 }
