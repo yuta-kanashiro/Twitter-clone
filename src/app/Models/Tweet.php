@@ -29,4 +29,12 @@ class Tweet extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * あるツイートを取得
+     *  */
+    public function getTweet($id)
+    {
+        return $this->find($id);
+    }
 }
