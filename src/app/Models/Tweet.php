@@ -31,10 +31,10 @@ class Tweet extends Model
     }
 
     /**
-     * あるツイートを取得
+     * あるツイートとそのユーザーの取得
      *  */
     public function getTweet($id)
     {
-        return $this->find($id);
+        return $this->with('user')->find($id);
     }
 }
