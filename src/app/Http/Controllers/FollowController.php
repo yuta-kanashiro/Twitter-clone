@@ -7,36 +7,35 @@ use App\Models\User;
 class FollowController extends Controller
 {
     /**
-    * フォロー済みかチェック
+    * フォロー済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
-    * @param  int $id
+    * @param  int $followUserId
     * @return bool
     */
-    public function followCheck(int $id): bool
+    public static function followCheck(int $followUserId): bool
     {
         $loginUser = User::find(auth()->id());
-        return $loginUser->followCheck($id);
+
+        $existing = $loginUser->followCheck($followUserId);
+        $myself = $loginUser->id === $followUserId;
+
+        if ($existing && !$myself){
+            return true;
+        }elseif(!$existing && !$myself){
+            return false;
+        }
     }
 
     /**
     * フォローする
     * 
-    * @param  int $id
+    * @param  int $followUserId
     */
-    public function follow(int $id)
+    public function follow(int $followUserId)
     {
-        // ログイン中のユーザー
         $loginUser = User::find(auth()->id());
-        // フォロー対象のユーザーID
-        $followUserId = $id;
 
-        // すでにフォロー済みではないか？
-        $existing = $loginUser->followCheck($followUserId);
-        // フォローする相手がユーザ自身ではないか？
-        $myself = $loginUser->id === $followUserId;
-
-        // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
-        if (!$existing && !$myself){
+        if(!$this->followCheck($followUserId)){
             $loginUser->follow($followUserId);
         }
     }
@@ -44,22 +43,13 @@ class FollowController extends Controller
     /**
     * フォローを外す
     * 
-    * @param  int $id
+    * @param  int $followUserId
     */
-    public function unfollow(int $id)
+    public function unfollow(int $followUserId)
     {
-        // ログイン中のユーザー
         $loginUser = User::find(auth()->id());
-        // フォロー対象のユーザーID
-        $followUserId = $id;
 
-        // すでにフォロー済みではないか？
-        $existing = $loginUser->followCheck($followUserId);
-        // フォローする相手がユーザ自身ではないか？
-        $myself = $loginUser->id === $followUserId;
-
-        // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
-        if ($existing && !$myself){
+        if($this->followCheck($followUserId)){
             $loginUser->unfollow($followUserId);
         }
     }

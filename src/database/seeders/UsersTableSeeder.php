@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\FollowController;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,15 +35,11 @@ class UsersTableSeeder extends Seeder
         $followingUsers = User::all();
 
         foreach($followingUsers as $followingUser){
-            // 1~20までの数値をランダムで取得
-            $ran = rand(1, 20);
-            // Userモデルからランダムで1~20件取得
-            $followerUsers = User::inRandomOrder()->take($ran)->get();
+            // Userモデルからランダムで1~15件取得
+            $followerUsers = User::inRandomOrder()->take(rand(1, 15))->get();
 
             foreach($followerUsers as $followerUser){
-                // すでにフォロー済みではないか？
-                $existing = $followingUser->isFollowing($followerUser->id);
-                // フォローする相手がユーザ自身ではないか？
+                $existing = $followingUser->followCheck($followerUser->id);
                 $myself = $followingUser->id === $followerUser->id;
 
                 // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
