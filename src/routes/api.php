@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     // フォローチェック
     Route::get('/followCheck/{id}', [FollowController::class, 'followCheck']);
     // フォローする
-    Route::get('/follow/{id}', [FollowController::class, 'follow']);
+    Route::post('/follow/{id}', [FollowController::class, 'follow']);
     // フォローを外す
-    Route::get('/unfollow/{id}', [FollowController::class, 'unfollow']);
+    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
 });

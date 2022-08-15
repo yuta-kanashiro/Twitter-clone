@@ -27,13 +27,13 @@ export default {
 
         // フォローする
         const follow = async() => {
-            await axios.get('/api/follow/' + id.value)
+            await axios.post('/api/follow/' + id.value)
             followCheck()
         }
 
         // フォローを外す
         const unfollow = async() => {
-            await axios.get('/api/unfollow/' + id.value)
+            await axios.post('/api/unfollow/' + id.value)
             followCheck()
         }
 

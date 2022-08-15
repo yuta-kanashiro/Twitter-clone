@@ -18712,7 +18712,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/follow/' + id.value);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/follow/' + id.value);
 
               case 2:
                 followCheck();
@@ -18738,7 +18738,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/unfollow/' + id.value);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/unfollow/' + id.value);
 
               case 2:
                 followCheck();
