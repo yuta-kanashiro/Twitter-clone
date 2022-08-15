@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateRequest;
 use App\Models\User;
+use App\UseCase\User\UpdateAction;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +45,15 @@ class UserController extends Controller
             'loginUserId' => $loginUserId,
             'user' => $user
         ];
+    }
+
+    /**
+    * 全ユーザー情報の取得
+    * 
+    *
+    */
+    public function update(UpdateRequest $request, UpdateAction $useCase)
+    {
+        return $useCase->update($request);
     }
 }
