@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
-    * 
-    * 
     * @param  User $user
     */
     public function __construct(User $user)

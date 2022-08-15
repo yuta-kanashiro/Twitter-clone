@@ -48,7 +48,7 @@ class FollowController extends Controller
     * 
     * @param  int $id
     */
-    public function unfollow($id)
+    public function unfollow(int $id)
     {
         // ログイン中のユーザー
         $loginUser = User::find(Auth::id());
