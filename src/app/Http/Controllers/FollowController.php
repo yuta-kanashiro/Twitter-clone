@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
@@ -16,7 +14,7 @@ class FollowController extends Controller
     */
     public function followCheck(int $id): bool
     {
-        $loginUser = User::find(Auth::id());
+        $loginUser = User::find(auth()->id());
         return $loginUser->followCheck($id);
     }
 
@@ -28,7 +26,7 @@ class FollowController extends Controller
     public function follow(int $id)
     {
         // ログイン中のユーザー
-        $loginUser = User::find(Auth::id());
+        $loginUser = User::find(auth()->id());
         // フォロー対象のユーザーID
         $followUserId = $id;
 
@@ -51,7 +49,7 @@ class FollowController extends Controller
     public function unfollow(int $id)
     {
         // ログイン中のユーザー
-        $loginUser = User::find(Auth::id());
+        $loginUser = User::find(auth()->id());
         // フォロー対象のユーザーID
         $followUserId = $id;
 
