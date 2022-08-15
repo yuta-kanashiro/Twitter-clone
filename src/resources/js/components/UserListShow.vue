@@ -6,7 +6,7 @@
                 <div class="card mb-5">
                     <div class="card-body text-black" style="gap:0 12px">
                         <div class="mb-2">
-                            <div v-if="user.profile_image === null">
+                            <div v-if="!user.profile_image">
                                 <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="100" height="100">
                             </div>
                             <div v-else>
@@ -20,12 +20,8 @@
                                     <span class="d-block text-muted mb-2">@{{ user.user_name }}</span>
                                 </div>
                                 <div class="ms-auto">
-                                    <div v-if="loginUserId === user.id">
-                                        <button type="button" class="btn btn-outline-dark rounded-pill">編集</button>
-                                    </div>
-                                    <div v-else>
-                                        <FollowButton :id="user.id"/>
-                                    </div>
+                                    <button v-if="loginUserId === user.id" type="button" class="btn btn-outline-dark rounded-pill">編集</button>
+                                    <FollowButton v-else :id="user.id"/>
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
@@ -44,7 +40,7 @@
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
                         <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex">
                             <div class="me-2">
-                                <div v-if="user.profile_image === null">
+                                <div v-if="!user.profile_image">
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
