@@ -34,12 +34,13 @@ class UserController extends Controller
      */
     public function show(int $id): array
     {
-        $loginUserId = Auth::id();
         $user = $this->user->getUserInfo($id);
 
         return [
-            'loginUserId' => $loginUserId,
-            'user' => $user
+            'user' => $user,
+            'loginUserId' => Auth::id(),
+            'countFollowing' => $user->countFollowings(),
+            'countFollower' => $user->countFollowers()
         ];
     }
 }

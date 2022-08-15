@@ -136,16 +136,20 @@ class User extends Authenticatable
 
     /**
      * フォロー数カウント
+     * 
+     * @return int
      */
-    public function countFollowings()
+    public function countFollowings(): int
     {
         return $this->followings()->count();
     }
 
     /**
      * フォロワー数カウント
+     * 
+     * @return int
      */
-    public function countFollowers()
+    public function countFollowers(): int
     {
         return $this->followers()->count();
     }

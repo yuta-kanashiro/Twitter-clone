@@ -28,8 +28,8 @@
                         </div>
                         <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link">
                             <div class="d-flex mt-2">
-                                <div>1<span class="text-muted me-1">フォロー</span></div>
-                                <div>1<span class="text-muted">フォロワー</span></div>
+                                <div>{{ countFollowing }}<span class="text-muted me-1">フォロー</span></div>
+                                <div>{{ countFollower }}<span class="text-muted">フォロワー</span></div>
                             </div>
                         </router-link>
                     </div>
@@ -81,6 +81,8 @@ export default {
         const loginUserId = ref();
         // Numberでidを文字列から数値に変換
         const id = ref(Number(props.id));
+        const countFollowing = ref();
+        const countFollower = ref();
 
         // あるユーザーの情報を取得
         const getProfileData = async() => {
@@ -88,6 +90,8 @@ export default {
             user.value = response.data.user
             tweets.value = response.data.user.tweets
             loginUserId.value = response.data.loginUserId
+            countFollowing.value = response.data.countFollowing
+            countFollower.value = response.data.countFollower
         }
 
         // 日付のフォーマット
@@ -102,6 +106,8 @@ export default {
             user,
             tweets,
             loginUserId,
+            countFollowing,
+            countFollower,
             format
         }
     }
