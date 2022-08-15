@@ -26,7 +26,6 @@
                                     <div v-else>
                                         <FollowButton :id="user.id"/>
                                     </div>
-
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>

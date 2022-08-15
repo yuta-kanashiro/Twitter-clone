@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="follow" v-if="!isFollowing" @click="follow">
-            <button type="button" class="btn btn-outline-info rounded-pill" v-cloak>フォロー</button>
+            <button type="button" class="btn btn-outline-info rounded-pill">フォロー</button>
         </div>
         <div class="unfollow" v-else @click="unfollow">
             <button type="button" class="btn btn-info text-white rounded-pill">フォロー中</button>
