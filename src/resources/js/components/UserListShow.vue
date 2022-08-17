@@ -21,7 +21,8 @@
                                 </div>
                                 <div class="ms-auto">
                                     <div v-if="loginUserId === user.id">
-                                        <button type="button" class="btn btn-outline-dark rounded-pill">編集</button>
+                                        <!-- <button type="button" class="btn btn-outline-dark rounded-pill">編集</button> -->
+                                        <UserEdit :login-user="user" :id="user.id"/>
                                     </div>
                                     <div v-else>
                                         <FollowButton :id="user.id"/>
@@ -70,12 +71,14 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
 import FollowButton from './FollowButton.vue';
+import UserEdit from './UserEdit.vue';
 import dayjs from "dayjs";
 dayjs.locale("ja");
 
 export default {
     components: {
-        FollowButton
+        FollowButton,
+        UserEdit,
     },
     props: {
         id: String

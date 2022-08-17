@@ -26,7 +26,9 @@ Route::middleware('auth')->group(function () {
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
     // ユーザー情報編集
-    Route::post('/userProfile/update/', [UserController::class, 'update']);
+    Route::post('/userProfile/update/{user}', [UserController::class, 'update']);
+    // ユーザー一覧取得
+    Route::get('/getLoginUser', [UserController::class, 'getLoginUser']);
     // フォローチェック
     Route::get('/followCheck/{id}', [FollowController::class, 'followCheck']);
     // フォローする

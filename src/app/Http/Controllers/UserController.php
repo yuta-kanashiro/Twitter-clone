@@ -48,12 +48,22 @@ class UserController extends Controller
     }
 
     /**
-    * 全ユーザー情報の取得
+    * ユーザー情報の編集
     * 
     *
     */
     public function update(UpdateRequest $request, UpdateAction $useCase)
     {
         return $useCase->update($request);
+    }
+
+    /**
+    * ログインユーザー情報の取得
+    * 
+    *
+    */
+    public function getLoginUser(): object
+    {
+        return Auth::user();
     }
 }
