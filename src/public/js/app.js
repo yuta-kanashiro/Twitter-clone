@@ -18877,7 +18877,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     }; // あるユーザーの情報を取得
 
 
-    var getData = /*#__PURE__*/function () {
+    var getUserData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var getFollowCheck, getProfileData, FollowCheck, ProfileData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -18913,7 +18913,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
         }, _callee);
       }));
 
-      return function getData() {
+      return function getUserData() {
         return _ref.apply(this, arguments);
       };
     }(); // 日付のフォーマット
@@ -18925,7 +18925,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
-      getData();
+      getUserData();
     });
     return {
       user: user,

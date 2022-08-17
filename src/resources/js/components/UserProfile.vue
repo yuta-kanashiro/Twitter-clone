@@ -92,7 +92,7 @@ export default {
         }
 
         // あるユーザーの情報を取得
-        const getData = async () => {
+        const getUserData = async () => {
             const getFollowCheck = axios.get('/api/followCheck/' + id.value)
             const getProfileData = axios.get('/api/userProfile/' + id.value)
 
@@ -118,7 +118,7 @@ export default {
         }
 
         onMounted(() => {
-            getData()
+            getUserData()
         })
 
         return{
