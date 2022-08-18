@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
     // フォローチェック
-    Route::get('/followCheck/{id}', [FollowController::class, 'followCheck']);
+    Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
     // フォローする
     Route::post('/follow/{id}', [FollowController::class, 'follow']);
     // フォローを外す

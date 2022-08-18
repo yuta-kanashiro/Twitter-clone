@@ -108,7 +108,7 @@ class User extends Authenticatable
      * 
      * @param int $followUserId
      */
-    public function followCheck(int $followUserId): bool
+    public function isFollowing(int $followUserId): bool
     {
         // フォロー対象のユーザID（$followUserId）が、すでにフォローしているfollower_idと重複していないかどうかを判定
         return $this->followings()->where('follower_id', $followUserId)->exists();

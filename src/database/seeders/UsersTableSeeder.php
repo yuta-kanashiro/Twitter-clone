@@ -39,11 +39,11 @@ class UsersTableSeeder extends Seeder
             $followerUsers = User::inRandomOrder()->take(rand(1, 15))->get();
 
             foreach($followerUsers as $followerUser){
-                $existing = $followingUser->followCheck($followerUser->id);
-                $myself = $followingUser->id === $followerUser->id;
+                $followingExists = $followingUser->isFollowing($followerUser->id);
+                $isMyself = $followingUser->id === $followerUser->id;
 
                 // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
-                if (!$existing && !$myself){
+                if (!$followingExists && !$isMyself){
                     $followingUser->follow($followerUser->id);
                 }
             }

@@ -93,13 +93,13 @@ export default {
 
         // あるユーザーの情報を取得
         const getUserData = async () => {
-            const getFollowCheck = axios.get('/api/followCheck/' + id.value)
+            const getIsFollowing = axios.get('/api/isFollowing/' + id.value)
             const getProfileData = axios.get('/api/userProfile/' + id.value)
 
             isLoding.value = true
 
-            const FollowCheck = await getFollowCheck
-            isFollowing.value = FollowCheck.data === 1 ? true : false
+            const followingExists = await getIsFollowing
+            isFollowing.value = followingExists.data === 1 ? true : false
 
             const ProfileData = await getProfileData
             user.value = ProfileData.data.user

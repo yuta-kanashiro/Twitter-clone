@@ -18879,20 +18879,20 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
     var getUserData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var getFollowCheck, getProfileData, FollowCheck, ProfileData;
+        var getIsFollowing, getProfileData, followingExists, ProfileData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                getFollowCheck = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/followCheck/' + id.value);
+                getIsFollowing = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isFollowing/' + id.value);
                 getProfileData = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/userProfile/' + id.value);
                 isLoding.value = true;
                 _context.next = 5;
-                return getFollowCheck;
+                return getIsFollowing;
 
               case 5:
-                FollowCheck = _context.sent;
-                isFollowing.value = FollowCheck.data === 1 ? true : false;
+                followingExists = _context.sent;
+                isFollowing.value = followingExists.data === 1 ? true : false;
                 _context.next = 9;
                 return getProfileData;
 
