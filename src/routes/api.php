@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,4 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth')->group(function () {
     // ユーザー一覧取得
     Route::get('/usersList', [UserController::class, 'index']);
+    // ユーザー詳細取得
+    Route::get('/userProfile/{id}', [UserController::class, 'show']);
+    // フォローチェック
+    Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
+    // フォローする
+    Route::post('/follow/{id}', [FollowController::class, 'follow']);
+    // フォローを外す
+    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
 });

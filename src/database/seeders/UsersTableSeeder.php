@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\FollowController;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,5 +30,23 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::factory()->count(50)->create(); 
+
+        // 中間テーブル（followテーブル）のダミーデータ作成
+        $followingUsers = User::all();
+
+        foreach($followingUsers as $followingUser){
+            // Userモデルからランダムで1~15件取得
+            $followerUsers = User::inRandomOrder()->take(rand(1, 15))->get();
+
+            foreach($followerUsers as $followerUser){
+                $followingExists = $followingUser->isFollowing($followerUser->id);
+                $isMyself = $followingUser->id === $followerUser->id;
+
+                // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
+                if (!$followingExists && !$isMyself){
+                    $followingUser->follow($followerUser->id);
+                }
+            }
+        }
     }
 }
