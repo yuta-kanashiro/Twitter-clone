@@ -80,6 +80,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follow', 'follower_id', 'following_id')->withTimestamps();
     }
 
+    // あるユーザーがいいねしている掲示板のIDを取得
+    public function likes()
+    {
+        return $this->belongsToMany(Tweet::class, 'likes', 'user_id', 'tweet_id')->withTimestamps();
+    }
+
     # ユーザーに関する処理
     /**
     * 全ユーザー情報の取得(ユーザー一覧画面)
@@ -107,6 +113,7 @@ class User extends Authenticatable
      * フォロー判定
      * 
      * @param int $followUserId
+     * @return bool
      */
     public function isFollowing(int $followUserId): bool
     {
@@ -152,5 +159,39 @@ class User extends Authenticatable
     public function countFollowers(): int
     {
         return $this->followers()->count();
+    }
+
+    # いいねに関する処理
+    /**
+     * いいね判定
+     * 
+     * @param int $likeTweetId
+     * @return bool
+     */
+    public function isLike($likeTweetId): bool
+    {
+        //  いいね対象の掲示板ID（$likeBulletinId）が、すでにいいねしているbulletin_idと重複していないかどうかを判定
+        return $this->likes()->where('tweet_id', $likeTweetId)->exists();
+    }
+
+    
+    /**
+     * いいね処理
+     * 
+     * @param int $likeTweetId
+     */
+    public function like($likeTweetId)
+    {
+        $this->likes()->attach($likeTweetId);
+    }
+
+    /**
+     * いいねを外す処理
+     * 
+     * @param int $likeTweetId
+     */
+    public function unlike($likeTweetId)
+    {
+        $this->likes()->detach($likeTweetId);
     }
 }

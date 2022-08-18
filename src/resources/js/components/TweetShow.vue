@@ -24,6 +24,7 @@
                             <span class="d-block fs-4 mb-2">{{ tweet.text }}</span>
                             <span class="d-block text-muted">{{ format(tweet.created_at) }}</span>
                         </div>
+                        <LikeButton/>
                     </div>
                 </div>
             </div>
@@ -33,10 +34,14 @@
 <script>
 import axios from 'axios';
 import { ref, onMounted } from 'vue'
+import LikeButton from './LikeButton.vue';
 import dayjs from "dayjs";
 dayjs.locale("ja");
 
 export default {
+    components: {
+        LikeButton
+    },
     props: {
         id: String
     },

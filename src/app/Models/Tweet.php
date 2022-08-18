@@ -37,4 +37,16 @@ class Tweet extends Model
     {
         return $this->with('user')->find($id);
     }
+
+    // ある掲示板をいいねしているユーザーのIDを取得
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
+    }
+
+    // いいね数カウント
+    public function countLikes()
+    {
+        return $this->likes()->count();
+    }
 }
