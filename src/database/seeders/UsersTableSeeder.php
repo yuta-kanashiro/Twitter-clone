@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
 
         foreach($followingUsers as $followingUser){
             // Userモデルからランダムで1~15件取得
-            $followerUsers = User::inRandomOrder()->take(rand(1, 15))->get();
+            $followerUsers = User::inRandomOrder()->take(rand(0, 12))->get();
 
             foreach($followerUsers as $followerUser){
                 $followingExists = $followingUser->isFollowing($followerUser->id);
