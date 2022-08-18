@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card">
+                <div class="card" v-if="!isLoding">
                     <div class="card-body">
                         <router-link :to="'/user-profile/' + user.id" class="router-link d-flex mb-3">
-                            <!-- <div class="d-flex mb-3"> -->
+                            <div class="d-flex">
                                 <div class="me-2">
                                     <div v-if="user.profile_image === null">
                                         <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="50" height="50">
@@ -18,13 +18,15 @@
                                     <b class="d-block">{{ user.account_name }}</b>
                                     <span class="d-blocck text-muted">@{{ user.user_name }}</span>
                                 </div>
-                            <!-- </div> -->
+                            </div>
                         </router-link>
                         <div>
                             <span class="d-block fs-4 mb-2">{{ tweet.text }}</span>
                             <span class="d-block text-muted">{{ format(tweet.created_at) }}</span>
                         </div>
-                        <LikeButton/>
+                        <div class="mt-2">
+                            <LikeButton :tweetId="tweetId" :isLike="isLike" @emitLike="getLikeData"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,13 +50,26 @@ export default {
     setup(props){
         const tweet = ref([]);
         const user = ref([]);
-        const id = ref(Number(props.id));
+        const tweetId = ref(Number(props.id));
+        const isLike = ref();
 
-        // ユーザー一覧取得
-        const getTweet = async() => {
-            const response = await axios.get('/api/tweet/' + id.value)
-            tweet.value = response.data
-            user.value = response.data.user
+        const isLoding = ref(false);
+
+        // ツイート一覧取得
+        const getTweetData = async () => {
+            isLoding.value = true
+
+            const getIsLike = axios.get('/api/isLike/' + tweetId.value)
+            const getTweet = axios.get('/api/tweet/' + tweetId.value)
+
+            const likeExists = await getIsLike
+            isLike.value = likeExists.data === 1 ? true : false
+
+            const tweetData = await getTweet
+            tweet.value = tweetData.data
+            user.value = tweetData.data.user
+
+            isLoding.value = false
         }
 
         // 日付のフォーマット
@@ -63,12 +78,22 @@ export default {
             return created_at;
         }
 
-        onMounted(getTweet)
+        const getLikeData = (likeData) => {
+            isLike.value = likeData
+        }
+
+        onMounted(() => {
+            getTweetData()
+        })
 
         return{
             tweet,
             user,
+            tweetId,
+            isLike,
+            isLoding,
             format,
+            getLikeData
         }
     }
 }
