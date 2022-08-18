@@ -105,8 +105,10 @@ class User extends Authenticatable
     // # フォローに関する処理
     /**
      * フォロー判定
+     * 
+     * @param int $followUserId
      */
-    public function followCheck($followUserId): bool
+    public function isFollowing(int $followUserId): bool
     {
         // フォロー対象のユーザID（$followUserId）が、すでにフォローしているfollower_idと重複していないかどうかを判定
         return $this->followings()->where('follower_id', $followUserId)->exists();
@@ -114,32 +116,40 @@ class User extends Authenticatable
 
     /**
      * フォロー処理
+     * 
+     * @param int $followUserId
      */
-    public function follow($followUserId)
+    public function follow(int $followUserId)
     {
         $this->followings()->attach($followUserId);
     }
 
     /**
      * フォローを外す処理
+     * 
+     * @param int $followUserId
      */
-    public function unfollow($followUserId)
+    public function unfollow(int $followUserId)
     {
         $this->followings()->detach($followUserId);
     }
 
     /**
      * フォロー数カウント
+     * 
+     * @return int
      */
-    public function countFollowings()
+    public function countFollowings(): int
     {
         return $this->followings()->count();
     }
 
     /**
      * フォロワー数カウント
+     * 
+     * @return int
      */
-    public function countFollowers()
+    public function countFollowers(): int
     {
         return $this->followers()->count();
     }

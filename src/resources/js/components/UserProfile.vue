@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <!-- ユーザープロフィール -->
-                <div class="card mb-5">
+                <div class="card mb-5" v-if="!isLoding">
                     <div class="card-body text-black" style="gap:0 12px">
                         <div class="mb-2">
-                            <div v-if="user.profile_image === null">
+                            <div v-if="!user.profile_image">
                                 <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="100" height="100">
                             </div>
                             <div v-else>
@@ -20,21 +20,16 @@
                                     <span class="d-block text-muted mb-2">@{{ user.user_name }}</span>
                                 </div>
                                 <div class="ms-auto">
-                                    <div v-if="loginUserId === user.id">
-                                        <button type="button" class="btn btn-outline-dark rounded-pill">編集</button>
-                                    </div>
-                                    <div v-else>
-                                        <FollowButton :id="user.id"/>
-                                    </div>
-
+                                    <button v-if="loginUserId === user.id" type="button" class="btn btn-outline-dark rounded-pill">編集</button>
+                                    <FollowButton v-else :id="user.id" :isFollowing="isFollowing" @emitFollow="isFollow"/>
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
                         </div>
                         <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link">
                             <div class="d-flex mt-2">
-                                <div>1<span class="text-muted me-1">フォロー</span></div>
-                                <div>1<span class="text-muted">フォロワー</span></div>
+                                <div>{{ countFollowing }}<span class="text-muted me-1">フォロー</span></div>
+                                <div>{{ countFollower }}<span class="text-muted">フォロワー</span></div>
                             </div>
                         </router-link>
                     </div>
@@ -45,7 +40,7 @@
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
                         <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex">
                             <div class="me-2">
-                                <div v-if="user.profile_image === null">
+                                <div v-if="!user.profile_image">
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
@@ -86,13 +81,34 @@ export default {
         const loginUserId = ref();
         // Numberでidを文字列から数値に変換
         const id = ref(Number(props.id));
+        const countFollowing = ref();
+        const countFollower = ref();
+        const isFollowing = ref();
+
+        const isLoding = ref(false);
+
+        const isFollow = (followData) => {
+            isFollowing.value = followData
+        }
 
         // あるユーザーの情報を取得
-        const getProfileData = async() => {
-            const response = await axios.get('/api/userProfile/' + id.value)
-            user.value = response.data.user
-            tweets.value = response.data.user.tweets
-            loginUserId.value = response.data.loginUserId
+        const getUserData = async () => {
+            const getIsFollowing = axios.get('/api/isFollowing/' + id.value)
+            const getProfileData = axios.get('/api/userProfile/' + id.value)
+
+            isLoding.value = true
+
+            const followingExists = await getIsFollowing
+            isFollowing.value = followingExists.data === 1 ? true : false
+
+            const ProfileData = await getProfileData
+            user.value = ProfileData.data.user
+            tweets.value = ProfileData.data.user.tweets
+            loginUserId.value = ProfileData.data.loginUserId
+            countFollowing.value = ProfileData.data.countFollowing
+            countFollower.value = ProfileData.data.countFollower
+
+            isLoding.value = false
         }
 
         // 日付のフォーマット
@@ -101,13 +117,20 @@ export default {
             return created_at;
         }
 
-        onMounted(getProfileData)
+        onMounted(() => {
+            getUserData()
+        })
 
         return{
             user,
             tweets,
             loginUserId,
-            format
+            countFollowing,
+            countFollower,
+            format,
+            isFollowing,
+            isFollow,
+            isLoding
         }
     }
 }

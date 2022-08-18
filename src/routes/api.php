@@ -30,11 +30,11 @@ Route::middleware('auth')->group(function () {
 
     # フォロー関連のルーティング
     // フォローチェック
-    Route::get('/followCheck/{id}', [FollowController::class, 'followCheck']);
+    Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
     // フォローする
-    Route::get('/follow/{id}', [FollowController::class, 'follow']);
+    Route::post('/follow/{id}', [FollowController::class, 'follow']);
     // フォローを外す
-    Route::get('/unfollow/{id}', [FollowController::class, 'unfollow']);
+    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
 
     # ツイート関連のルーティング
     // ツイート詳細取得

@@ -1,53 +1,53 @@
 <template>
     <div>
-        <div class="follow" v-if="!isFollowing" @click="follow">
-            <button type="button" class="btn btn-outline-info rounded-pill" v-cloak>フォロー</button>
-        </div>
-        <div class="unfollow" v-else @click="unfollow">
-            <button type="button" class="btn btn-info text-white rounded-pill">フォロー中</button>
-        </div>
+        <button type="button" class="btn btn-outline-info rounded-pill" v-if="!isFollowing" @click="follow">フォロー</button>
+        <button type="button" class="btn btn-info text-white rounded-pill" v-else @click="unfollow">フォロー中</button>
     </div>
 </template>
 
 <script>
 
 import axios from 'axios';
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 export default {
     props: {
-        id: Number
+        id: Number,
+        isFollowing: Boolean
     },
-    setup(props){
+    setup(props, context){
         const user = ref([]);
-        const id = ref(props.id)
-        const isFollowing = ref();
+        const id = ref(props.id);
 
-        // フォローチェック（既にフォローしているユーザーかチェック）
-        const followCheck = async() => {
-            const response = await axios.get('/api/followCheck/' + id.value)
-            isFollowing.value = response.data
+        const execEmit = () => {
+            context.emit('emitFollow', !props.isFollowing);
         }
 
         // フォローする
         const follow = async() => {
-            await axios.get('/api/follow/' + id.value)
-            followCheck()
+            try {
+                await axios.post('/api/follow/' + id.value)
+                execEmit()
+            } catch (error) {
+                alert("エラーが発生しました。")
+            }
         }
 
         // フォローを外す
         const unfollow = async() => {
-            await axios.get('/api/unfollow/' + id.value)
-            followCheck()
+            try {
+                await axios.post('/api/unfollow/' + id.value)
+                execEmit()
+            } catch (error) {
+                alert("エラーが発生しました。")
+            }
         }
-
-        onMounted(followCheck)
 
         return{
             user,
-            isFollowing,
             follow,
-            unfollow
+            unfollow,
+            execEmit
         }
     }
 }

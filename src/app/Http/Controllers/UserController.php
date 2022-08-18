@@ -9,31 +9,38 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
+    * @param  User $user
+    */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
     * 全ユーザー情報の取得
     * 
-    * @param  User $user
     * @return Collection
     */
-    public function index(User $user): Collection
+    public function index(): Collection
     {
-        return $user->getAllUsers();
+        return $this->user->getAllUsers();
     }
 
     /**
      * あるユーザーの情報の取得
      *
-     * @param User $user
      * @param  int  $id
-    //  * @return object
+     * @return array
      */
-    public function show(User $user, int $id): array
+    public function show(int $id): array
     {
-        $loginUserId = Auth::id();
-        $user = $user->getUserInfo($id);
+        $user = $this->user->getUserInfo($id);
 
         return [
-            'loginUserId' => $loginUserId,
-            'user' => $user
+            'user' => $user,
+            'loginUserId' => Auth::id(),
+            'countFollowing' => $user->countFollowings(),
+            'countFollower' => $user->countFollowers()
         ];
     }
 }

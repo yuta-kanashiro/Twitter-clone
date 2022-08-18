@@ -6,7 +6,7 @@
                     <router-link :to="'/user-profile/' + user.id" class="router-link">
                         <div class="card-body d-flex">
                             <div class="me-2">
-                                <div v-if="user.profile_image === null">
+                                <div v-if="!user.profile_image">
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
