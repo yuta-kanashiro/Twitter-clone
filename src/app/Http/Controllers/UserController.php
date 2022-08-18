@@ -7,6 +7,7 @@ use App\Models\User;
 use App\UseCase\User\UpdateAction;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -54,6 +55,7 @@ class UserController extends Controller
     */
     public function update(UpdateRequest $request, UpdateAction $useCase)
     {
+        Log::info($request);
         return $useCase->update($request);
     }
 

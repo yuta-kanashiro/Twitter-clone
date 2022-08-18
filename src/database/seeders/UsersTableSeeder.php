@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'account_name' => 'sample1',
-                'user_name' => 'sample1sample1',
+                'user_name' => 'sample111',
                 'email' => 'sample1@sample.com',
                 'password' => bcrypt('sample1sample1'),
                 'profile_text' => 'みなさんこんにちは。僕の名前はsample1です。この文章は自己紹介のサンプルです。',
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
 
             foreach($followerUsers as $followerUser){
                 // すでにフォロー済みではないか？
-                $existing = $followingUser->isFollowing($followerUser->id);
+                $existing = $followingUser->followCheck($followerUser->id);
                 // フォローする相手がユーザ自身ではないか？
                 $myself = $followingUser->id === $followerUser->id;
 

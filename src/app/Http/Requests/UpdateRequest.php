@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Client\Request;
 
 class UpdateRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +26,10 @@ class UpdateRequest extends FormRequest
     {
         return [
             'account_name' => ['required', 'string', 'max:20'],
-            'user_name' => ['required', 'string', 'regex:/^([a-zA-Z0-9]{1,10})+\z/u', 'unique:users'],
-            'profile_text' => ['required', 'string', 'max:120'],
+            'user_name' => ['required', 'string', 'regex:/^([a-zA-Z0-9]{1,10})+\z/u'],// , 'unique:user'を入れると動かなくなる
+            'profile_text' => ['string', 'max:120'],// reguired外したのにうまくいかない
         ];
     }
 }
+
+

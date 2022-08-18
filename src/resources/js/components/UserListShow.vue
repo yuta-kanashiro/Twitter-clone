@@ -20,14 +20,12 @@
                                     <span class="d-block text-muted mb-2">@{{ user.user_name }}</span>
                                 </div>
                                 <div class="ms-auto">
-                                    <div v-if="loginUserId === user.id">
-                                        <!-- <button type="button" class="btn btn-outline-dark rounded-pill">編集</button> -->
-                                        <UserEdit :login-user="user" :id="user.id"/>
+                                    <div v-if="loginUserId">
+                                        <UserEdit :loginUser="user"/>
                                     </div>
-                                    <div v-else>
+                                    <div v-if="!loginUserId">
                                         <FollowButton :id="user.id"/>
                                     </div>
-
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
@@ -95,7 +93,7 @@ export default {
             const response = await axios.get('/api/userProfile/' + id.value)
             user.value = response.data.user
             tweets.value = response.data.user.tweets
-            loginUserId.value = response.data.loginUserId
+            loginUserId.value = response.data.loginUserId === response.data.user.id ? true : false
         }
 
         // 日付のフォーマット

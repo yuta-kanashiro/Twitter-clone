@@ -6,30 +6,29 @@
             <div id="content" class="container">
                 <div class="row justify-content-center">
                     <div class="">
-                        <form  enctype="multipart/form-data" @submit="updateUser">
+                        <form enctype="multipart/form-data" @submit="updateUser">
                             <div class="form-group row">
                                 <label for="account_name" class="col-lg-4 mt-2">アカウント名:</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="account_name" v-model="loginUser.account_name">
+                                    <input type="text" class="form-control" id="account_name" name="account_name" :value="loginUser.account_name" required maxlength="20">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="user_name" class="col-lg-4 mt-2">ユーザーネーム:</label>
                                 <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="account_name" v-model="loginUser.user_name">
+                                    <input type="text" class="form-control" id="user_name" name="user_name" :value="loginUser.user_name" required maxlength="10">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="profile_text" class="col-lg-4 mt-2">プロフィール文:</label>
                                 <div class="col-lg-6">
-                                    <textarea type="text" class="form-control" id="account_name" v-model="loginUser.profile_text"></textarea>
+                                    <textarea type="text" class="form-control" id="profile_text" name="profile_text" :value="loginUser.profile_text" maxlength="120"></textarea>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
-                                <button type="submit" class="btn btn-outline-dark rounded-pill me-2" >更新する</button>
+                                <button type="submit" class="btn btn-outline-dark rounded-pill me-2">更新する</button>
                                 <button type="button" class="btn btn-dark rounded-pill" @click="closeModal">閉じる</button>
                             </div>
-                            {{id}}
                         </form>
                     </div>
                 </div>
@@ -40,17 +39,14 @@
 
 <script>
 import axios from 'axios';
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 export default {
     props: {
-        loginUser: Object,
-        id: Number
+        loginUser: Object
     },
-    setup(props, context){
+    setup(props) {
         const showContent = ref(false);
-        console.log(props.loginUser)
-        console.log(props.id)
 
         // モーダルウィンドウを表示する
         const openModal = () => {
@@ -62,31 +58,23 @@ export default {
             showContent.value = false;
         }; 
 
-        const execEmit = () => {
-            context.emit('loginUser', props.user);
-        }
-
-        // ログインユーザーの情報を取得
-        const getLoginUser = async () => {
-            const response = await axios.get('/getLoginUser')
-            // loginUser.value = response.data
-            // console.log(response)
-        }
-
         // ユーザー情報を更新
-        const updateUser = async () => {
-            const response = await axios.post('/userProfile/update/' + loginUser.value.id)
-            loginUser.value = response.data
-            execEmit()
-            closeModal()
+        const updateUser = async (e) => {
+            const loginUser = props.loginUser
+            const userData = new FormData();
+            userData.append("account_name", e.target.account_name.value);
+            userData.append("user_name", e.target.user_name.value);
+            userData.append("profile_text", e.target.profile_text.value);
+            try {
+                const response = await axios.post('/api/userProfile/update', userData)
+                loginUser.value = response.data
+                closeModal()
+            } catch (error) {
+                alert("エラーが発生しました。")
+            }
         }
-
-        onMounted(() => {
-            getLoginUser()
-        })
 
         return {
-            // loginUser,
             showContent,
             openModal,
             closeModal,

@@ -18795,13 +18795,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    loginUser: Object,
-    id: Number
+    loginUser: Object
   },
-  setup: function setup(props, context) {
-    var showContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
-    console.log(props.loginUser);
-    console.log(props.id); // モーダルウィンドウを表示する
+  setup: function setup(props) {
+    var showContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false); // モーダルウィンドウを表示する
 
     var openModal = function openModal() {
       showContent.value = true;
@@ -18810,74 +18807,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var closeModal = function closeModal() {
       showContent.value = false;
-    };
-
-    var execEmit = function execEmit() {
-      context.emit('loginUser', props.user);
-    }; // ログインユーザーの情報を取得
+    }; // ユーザー情報を更新
 
 
-    var getLoginUser = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+    var updateUser = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+        var loginUser, userData, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/getLoginUser');
+                loginUser = props.loginUser;
+                userData = new FormData();
+                userData.append("account_name", e.target.account_name.value);
+                userData.append("user_name", e.target.user_name.value);
+                userData.append("profile_text", e.target.profile_text.value);
+                _context.prev = 5;
+                _context.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/userProfile/update', userData);
 
-              case 2:
+              case 8:
                 response = _context.sent;
+                loginUser.value = response.data;
+                closeModal();
+                _context.next = 16;
+                break;
 
-              case 3:
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](5);
+                alert("エラーが発生しました。");
+
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[5, 13]]);
       }));
 
-      return function getLoginUser() {
+      return function updateUser(_x) {
         return _ref.apply(this, arguments);
-      };
-    }(); // ユーザー情報を更新
-
-
-    var updateUser = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/userProfile/update/' + loginUser.value.id);
-
-              case 2:
-                response = _context2.sent;
-                loginUser.value = response.data;
-                execEmit();
-                closeModal();
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      return function updateUser() {
-        return _ref2.apply(this, arguments);
       };
     }();
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
-      getLoginUser();
-    });
     return {
-      // loginUser,
       showContent: showContent,
       openModal: openModal,
       closeModal: closeModal,
@@ -19013,7 +18987,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_4___default().locale("ja");
                 response = _context.sent;
                 user.value = response.data.user;
                 tweets.value = response.data.user.tweets;
-                loginUserId.value = response.data.loginUserId;
+                loginUserId.value = response.data.loginUserId === response.data.user.id ? true : false;
 
               case 6:
               case "end":
@@ -19159,39 +19133,42 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_7 = {
   "class": "col-lg-6"
 };
-var _hoisted_8 = {
+var _hoisted_8 = ["value"];
+var _hoisted_9 = {
   "class": "form-group row"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "user_name",
   "class": "col-lg-4 mt-2"
 }, "ユーザーネーム:", -1
 /* HOISTED */
 );
 
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "col-lg-6"
 };
-var _hoisted_11 = {
+var _hoisted_12 = ["value"];
+var _hoisted_13 = {
   "class": "form-group row"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "profile_text",
   "class": "col-lg-4 mt-2"
 }, "プロフィール文:", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_15 = {
   "class": "col-lg-6"
 };
-var _hoisted_14 = {
+var _hoisted_16 = ["value"];
+var _hoisted_17 = {
   "class": "d-flex justify-content-center mt-3"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-outline-dark rounded-pill me-2"
 }, "更新する", -1
@@ -19207,45 +19184,45 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "編集"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     enctype: "multipart/form-data",
-    onSubmit: _cache[5] || (_cache[5] = function () {
+    onSubmit: _cache[2] || (_cache[2] = function () {
       return $setup.updateUser && $setup.updateUser.apply($setup, arguments);
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     id: "account_name",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $props.loginUser.account_name = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.loginUser.account_name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    name: "account_name",
+    value: $props.loginUser.account_name,
+    required: "",
+    maxlength: "20"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_8)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    id: "account_name",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $props.loginUser.user_name = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.loginUser.user_name]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    id: "user_name",
+    name: "user_name",
+    value: $props.loginUser.user_name,
+    required: "",
+    maxlength: "10"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     type: "text",
     "class": "form-control",
-    id: "account_name",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $props.loginUser.profile_text = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.loginUser.profile_text]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    id: "profile_text",
+    name: "profile_text",
+    value: $props.loginUser.profile_text,
+    maxlength: "120"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-dark rounded-pill",
-    onClick: _cache[4] || (_cache[4] = function () {
+    onClick: _cache[1] || (_cache[1] = function () {
       return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
     })
-  }, "閉じる")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.id), 1
-  /* TEXT */
-  )], 32
+  }, "閉じる")])], 32
   /* HYDRATE_EVENTS */
   )])])])], 512
   /* NEED_PATCH */
@@ -19474,16 +19451,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [$setup.loginUserId === $setup.user.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button type=\"button\" class=\"btn btn-outline-dark rounded-pill\">編集</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserEdit, {
-    "login-user": $setup.user,
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserEdit, {
+    loginUser: $setup.user
+  }, null, 8
+  /* PROPS */
+  , ["loginUser"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FollowButton, {
     id: $setup.user.id
   }, null, 8
   /* PROPS */
-  , ["login-user", "id"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FollowButton, {
-    id: $setup.user.id
-  }, null, 8
-  /* PROPS */
-  , ["id"])]))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.profile_text), 1
+  , ["id"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.profile_text), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: '/user-profile/' + $setup.user.id + '/follow-list',
