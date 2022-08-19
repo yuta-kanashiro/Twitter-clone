@@ -12,12 +12,11 @@ import { ref } from 'vue'
 
 export default {
     props: {
-        id: Number,
+        userId: Number,
         isFollowing: Boolean
     },
     setup(props, context){
         const user = ref([]);
-        const id = ref(props.id);
 
         const execEmit = () => {
             context.emit('emitFollow', !props.isFollowing);
@@ -26,7 +25,7 @@ export default {
         // フォローする
         const follow = async() => {
             try {
-                await axios.post('/api/follow/' + id.value)
+                await axios.post('/api/follow/' + props.userId)
                 execEmit()
             } catch (error) {
                 alert("エラーが発生しました。")
@@ -36,7 +35,7 @@ export default {
         // フォローを外す
         const unfollow = async() => {
             try {
-                await axios.post('/api/unfollow/' + id.value)
+                await axios.post('/api/unfollow/' + props.userId)
                 execEmit()
             } catch (error) {
                 alert("エラーが発生しました。")

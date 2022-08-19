@@ -10,9 +10,9 @@ class FollowController extends Controller
     * フォロー済みかチェック（フォローしていれば1,フォローしていなければ0を返す）
     *
     * @param  int $followUserId
-    * @return int
+    * @return bool
     */
-    public function isFollowing(int $followUserId): int
+    public function isFollowing(int $followUserId): bool
     {
         $loginUser = User::find(auth()->id());
 
@@ -20,9 +20,11 @@ class FollowController extends Controller
         $isMyself = $loginUser->id === $followUserId;
 
         if ($followingExists && !$isMyself){
-            return 1;
+            return true;
         }elseif(!$followingExists && !$isMyself){
-            return 0;
+            return false;
+        }elseif($isMyself){
+            return false;
         }
     }
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import UserList from "./components/UserList"
-import UserProfile from "./components/userProfile"
+import UserProfile from "./components/UserProfile"
 import TweetShow from "./components/TweetShow"
 
 const routes = [
