@@ -25,7 +25,8 @@
                             <span class="d-block text-muted">{{ format(tweet.created_at) }}</span>
                         </div>
                         <div class="mt-2">
-                            <LikeButton :tweetId="tweetId" :isLike="isLike" @emitLike="getLikeData"/>
+                            <p>{{ countLikes }}<span class="text-muted">件のいいね</span></p>
+                            <LikeButton class="border-top pt-3" :tweetId="tweetId" :isLike="isLike" @emitLike="getLikeData"/>
                         </div>
                     </div>
                 </div>
@@ -50,9 +51,9 @@ export default {
     setup(props){
         const tweet = ref([]);
         const user = ref([]);
+        const countLikes = ref()
         const tweetId = ref(Number(props.id));
         const isLike = ref();
-
         const isLoding = ref(false);
 
         // ツイート一覧取得
@@ -66,8 +67,9 @@ export default {
             isLike.value = likeExists.data === 1 ? true : false
 
             const tweetData = await getTweet
-            tweet.value = tweetData.data
-            user.value = tweetData.data.user
+            tweet.value = tweetData.data.tweet
+            user.value = tweetData.data.tweet.user
+            countLikes.value = tweetData.data.countLikes
 
             isLoding.value = false
         }
@@ -89,6 +91,7 @@ export default {
         return{
             tweet,
             user,
+            countLikes,
             tweetId,
             isLike,
             isLoding,

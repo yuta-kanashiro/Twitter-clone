@@ -44,8 +44,12 @@ class Tweet extends Model
         return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
     }
 
-    // いいね数カウント
-    public function countLikes()
+    /**
+     * いいね数カウント
+     * 
+     * @return int
+     */
+    public function countLikes(): int
     {
         return $this->likes()->count();
     }

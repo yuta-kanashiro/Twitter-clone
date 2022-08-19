@@ -18907,6 +18907,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
   setup: function setup(props) {
     var tweet = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
     var user = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
+    var countLikes = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var tweetId = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(Number(props.id));
     var isLike = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var isLoding = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false); // ツイート一覧取得
@@ -18932,11 +18933,12 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
               case 9:
                 tweetData = _context.sent;
-                tweet.value = tweetData.data;
-                user.value = tweetData.data.user;
+                tweet.value = tweetData.data.tweet;
+                user.value = tweetData.data.tweet.user;
+                countLikes.value = tweetData.data.countLikes;
                 isLoding.value = false;
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -18965,6 +18967,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     return {
       tweet: tweet,
       user: user,
+      countLikes: countLikes,
       tweetId: tweetId,
       isLike: isLike,
       isLoding: isLoding,
@@ -19075,7 +19078,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     FollowButton: _FollowButton_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
-    id: String
+    id: Number
   },
   setup: function setup(props) {
     var user = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
@@ -19322,6 +19325,13 @@ var _hoisted_15 = {
 var _hoisted_16 = {
   "class": "mt-2"
 };
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-muted"
+}, "件のいいね", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -19347,7 +19357,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.format($setup.tweet.created_at)), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LikeButton, {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countLikes), 1
+  /* TEXT */
+  ), _hoisted_17]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LikeButton, {
+    "class": "border-top pt-3",
     tweetId: $setup.tweetId,
     isLike: $setup.isLike,
     onEmitLike: $setup.getLikeData

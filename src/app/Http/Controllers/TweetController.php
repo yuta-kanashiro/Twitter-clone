@@ -20,10 +20,16 @@ class TweetController extends Controller
      * あるツイートを取得
      *
      * @param int $id
-     * @return object
+     * @return array
      */
-    public function show(int $id): object
+    public function show(int $id): array
     {
-        return $this->tweet->getTweet($id);
+        $tweet = $this->tweet->getTweet($id);
+        
+        return [
+            'tweet' => $tweet,
+            'countLikes' => $tweet->countLikes()
+        ];
+        // return $this->tweet->getTweet($id);
     }
 }
