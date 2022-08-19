@@ -18,11 +18,7 @@ class LikeController extends Controller
 
         $likeExists = $loginUser->isLike($likeTweetId);
 
-        if ($likeExists){
-            return true;
-        }elseif(!$likeExists){
-            return false;
-        }
+        return $likeExists;
     }
 
     /**

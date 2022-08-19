@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex justify-content-center">
-        <i type="button" v-if="!isLike" class="far fa-heart fa-lg heart" @click="like"></i>
-        <i type="button" v-if="isLike" class="fa fa-heart fa-lg text-danger" @click="unlike"></i>
+        <i type="button" v-if="!isLike" class="far fa-heart heart" @click="like"></i>
+        <i type="button" v-if="isLike" class="fa fa-heart text-danger heart" @click="unlike"></i>
     </div>
 </template>
 
@@ -45,4 +45,18 @@ export default {
     }
 }
 </script>
+<style>
+i {
+    font-size:1.5em;
+}
 
+.heart:active {
+    animation: small 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes small 
+{
+    100% {transform: scale(0.9);}
+}
+</style>
