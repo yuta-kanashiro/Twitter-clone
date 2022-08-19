@@ -70,14 +70,13 @@ class Tweet extends Model
      * ツイートの投稿
      * 
      * @param $request
-     * @return
+     * @return object
      */
-    public function createTweet($request)
+    public function createTweet($request): object
     {
         $this->user_id = auth()->id();
-        // $this->text = $request->text;
-        // $this->save();
-        $this->fill($request->text)->save();
+        $this->text = $request->text;
+        $this->save();
 
         return $this;
     }

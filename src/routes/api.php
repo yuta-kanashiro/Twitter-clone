@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/usersList', [UserController::class, 'index']);
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
+    // ログインユーザー取得
+    Route::get('/loginUser', [UserController::class, 'getLoginUser']);
 
     # ツイート関連のルーティング
     // タイムラインの取得

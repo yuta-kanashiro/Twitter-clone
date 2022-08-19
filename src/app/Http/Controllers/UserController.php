@@ -43,4 +43,16 @@ class UserController extends Controller
             'countFollower' => $user->countFollowers()
         ];
     }
+
+    /**
+     * あるユーザーの情報の取得
+     *
+     * @return object
+     */
+    public function getLoginUser(): object
+    {
+        $loginUser = auth()->user();
+
+        return $loginUser;
+    }
 }

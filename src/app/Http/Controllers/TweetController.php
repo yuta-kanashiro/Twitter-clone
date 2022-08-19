@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 use Illuminate\Support\Collection;
-use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
@@ -48,9 +47,9 @@ class TweetController extends Controller
      * あるツイートを取得
      *
      * @param TweetRequest $request
-    //  * @return array
+     * @return object
      */
-    public function store(TweetRequest $request)
+    public function store(TweetRequest $request): object
     {
         return $this->tweet->createTweet($request);
     }

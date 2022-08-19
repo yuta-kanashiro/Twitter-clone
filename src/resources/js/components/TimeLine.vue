@@ -18,9 +18,9 @@
                             <router-link :to="'/user-profile/' + tweet.user.id" class="router-link">
                                 <b>{{ tweet.user.account_name }}</b>
                                 <span class="text-muted ms-1">@{{ tweet.user.user_name }}</span>
+                                <span class="text-muted ms-2">{{ format(tweet.created_at) }}</span>
                             </router-link>
                             <router-link :to="'/tweet/' + tweet.id" class="router-link">
-                                <span class="text-muted float-end ">{{ format(tweet.created_at) }}</span>
                                 <span class="d-block">{{ tweet.text }}</span>
                             </router-link>
                         </div>

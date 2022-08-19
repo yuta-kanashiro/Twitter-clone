@@ -2,3 +2,24 @@
     text-decoration: none;
     color: black
 }
+
+.tweet-btn{
+    position: fixed;
+    right: 35px;
+    bottom: 35px;
+    font-size: 5.0em;
+    color: rgb(0, 225, 255);
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.tweet-btn:active {
+    animation: small 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes small 
+{
+    100% {transform: scale(0.9);}
+}
