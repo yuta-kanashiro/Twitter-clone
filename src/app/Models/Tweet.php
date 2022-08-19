@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Tweet extends Model
 {
@@ -32,10 +34,27 @@ class Tweet extends Model
 
     /**
      * あるツイートとそのユーザーの取得
-     *  */
-    public function getTweet($id)
+     * 
+     * @return object
+     */
+    public function getTweet($id): object
     {
         return $this->with('user')->find($id);
+    }
+
+    /**
+     * タイムラインの取得(フォローしているユーザーのツイートと自身のツイートを取得)
+     * 
+     * @return Collection
+     */
+    public function getTimeline(): Collection
+    {
+        $loginUser = $loginUser = User::find(auth()->id());
+
+        return $this->whereIn('user_id', $loginUser->followings()->pluck('follower_id'))
+                    ->orWhere('user_id', $loginUser->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
     }
 
     /**

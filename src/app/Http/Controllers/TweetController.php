@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 class TweetController extends Controller
@@ -30,5 +31,15 @@ class TweetController extends Controller
             'tweet' => $tweet,
             'countLikes' => $tweet->countLikes()
         ];
+    }
+
+    /**
+    * 全ユーザー情報の取得
+    * 
+    * @return Collection
+    */
+    public function getTimeline(): Collection
+    {
+        return $this->tweet->getTimeline();
     }
 }

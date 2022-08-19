@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/unlike/{id}', [LikeController::class, 'unlike']);
 
     # ツイート関連のルーティング
+    // タイムラインの取得
+    Route::get('/timeLine', [TweetController::class, 'getTimeline']);
     // ツイート詳細取得
     Route::get('/tweet/{id}', [TweetController::class, 'show']);
 });
