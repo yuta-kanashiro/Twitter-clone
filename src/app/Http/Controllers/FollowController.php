@@ -18,12 +18,9 @@ class FollowController extends Controller
 
         $followingExists = $loginUser->isFollowing($followUserId);
         $isMyself = $loginUser->id === $followUserId;
+        $response = $followingExists && !$isMyself;
 
-        if ($followingExists && !$isMyself){
-            return true;
-        }else{
-            return false;
-        }
+        return $response;
     }
 
     /**

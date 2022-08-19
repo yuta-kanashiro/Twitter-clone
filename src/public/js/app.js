@@ -18924,7 +18924,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
               case 3:
                 likeExists = _context.sent;
-                isLike.value = likeExists.data === 1 ? true : false;
+                isLike.value = Boolean(likeExists.data);
                 _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/tweet/' + tweetId.value);
 
@@ -19106,7 +19106,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
               case 3:
                 followingExists = _context.sent;
-                isFollowing.value = followingExists.data === 1 ? true : false;
+                isFollowing.value = Boolean(followingExists.data);
                 _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/userProfile/' + userId.value);
 

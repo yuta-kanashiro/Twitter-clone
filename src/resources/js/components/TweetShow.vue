@@ -61,7 +61,7 @@ export default {
             isLoding.value = true
 
             const likeExists = await axios.get('/api/isLike/' + tweetId.value)
-            isLike.value = likeExists.data === 1 ? true : false
+            isLike.value = Boolean(likeExists.data)
 
             const tweetData = await axios.get('/api/tweet/' + tweetId.value)
             tweet.value = tweetData.data.tweet

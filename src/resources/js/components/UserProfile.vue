@@ -96,7 +96,7 @@ export default {
             isLoding.value = true
 
             const followingExists = await axios.get('/api/isFollowing/' + userId.value)
-            isFollowing.value = followingExists.data === 1 ? true : false
+            isFollowing.value = Boolean(followingExists.data)
 
             const ProfileData = await axios.get('/api/userProfile/' + userId.value)
             user.value = ProfileData.data.user
