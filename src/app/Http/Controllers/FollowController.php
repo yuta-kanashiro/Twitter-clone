@@ -7,7 +7,7 @@ use App\Models\User;
 class FollowController extends Controller
 {
     /**
-    * フォロー済みかチェック（フォローしていれば1,フォローしていなければ0を返す）
+    * フォロー済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
     * @param  int $followUserId
     * @return bool
@@ -21,9 +21,7 @@ class FollowController extends Controller
 
         if ($followingExists && !$isMyself){
             return true;
-        }elseif(!$followingExists && !$isMyself){
-            return false;
-        }elseif($isMyself){
+        }else{
             return false;
         }
     }

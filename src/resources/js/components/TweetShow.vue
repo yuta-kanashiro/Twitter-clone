@@ -60,13 +60,10 @@ export default {
         const getTweetData = async () => {
             isLoding.value = true
 
-            const getIsLike = axios.get('/api/isLike/' + tweetId.value)
-            const getTweet = axios.get('/api/tweet/' + tweetId.value)
-
-            const likeExists = await getIsLike
+            const likeExists = await axios.get('/api/isLike/' + tweetId.value)
             isLike.value = likeExists.data === 1 ? true : false
 
-            const tweetData = await getTweet
+            const tweetData = await axios.get('/api/tweet/' + tweetId.value)
             tweet.value = tweetData.data.tweet
             user.value = tweetData.data.tweet.user
             countLikes.value = tweetData.data.countLikes

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import UserList from "./components/UserList"
-import UserProfile from "./components/UserProfile"
-import TweetShow from "./components/TweetShow"
+import UserList from "./components/UserList";
+import UserProfile from "./components/UserProfile";
+import TweetShow from "./components/TweetShow";
 
 const routes = [
     {
@@ -11,14 +11,14 @@ const routes = [
         component: UserList
     },
     {
-        path: '/user-profile/:id',
-        name: 'userProfile',
+        path: "/user-profile/:id",
+        name: "userProfile",
         component: UserProfile,
         props: true
     },
     {
-        path: '/tweet/:id',
-        name: 'tweetShow',
+        path: "/tweet/:id",
+        name: "tweetShow",
         component: TweetShow,
         props: true
     },

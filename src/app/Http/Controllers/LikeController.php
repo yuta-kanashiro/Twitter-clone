@@ -10,9 +10,9 @@ class LikeController extends Controller
     * いいね済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
     * @param  int $likeTweetId
-    * @return 
+    * @return bool
     */
-    public function isLike(int $likeTweetId)
+    public function isLike(int $likeTweetId): bool
     {
         $loginUser = User::find(auth()->id());
 
@@ -40,7 +40,7 @@ class LikeController extends Controller
     }
 
     /**
-    * フォローを外す
+    * いいねを外す
     * 
     * @param  int $likeTweetId
     */

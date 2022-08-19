@@ -30,6 +30,5 @@ class TweetController extends Controller
             'tweet' => $tweet,
             'countLikes' => $tweet->countLikes()
         ];
-        // return $this->tweet->getTweet($id);
     }
 }

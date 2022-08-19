@@ -18913,31 +18913,29 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
     var getTweetData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var getIsLike, getTweet, likeExists, tweetData;
+        var likeExists, tweetData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 isLoding.value = true;
-                getIsLike = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isLike/' + tweetId.value);
-                getTweet = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/tweet/' + tweetId.value);
-                _context.next = 5;
-                return getIsLike;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isLike/' + tweetId.value);
 
-              case 5:
+              case 3:
                 likeExists = _context.sent;
                 isLike.value = likeExists.data === 1 ? true : false;
-                _context.next = 9;
-                return getTweet;
+                _context.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/tweet/' + tweetId.value);
 
-              case 9:
+              case 7:
                 tweetData = _context.sent;
                 tweet.value = tweetData.data.tweet;
                 user.value = tweetData.data.tweet.user;
                 countLikes.value = tweetData.data.countLikes;
                 isLoding.value = false;
 
-              case 14:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -19097,24 +19095,22 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
 
     var getUserData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var getIsFollowing, getProfileData, followingExists, ProfileData;
+        var followingExists, ProfileData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                getIsFollowing = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isFollowing/' + userId.value);
-                getProfileData = axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/userProfile/' + userId.value);
                 isLoding.value = true;
-                _context.next = 5;
-                return getIsFollowing;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isFollowing/' + userId.value);
 
-              case 5:
+              case 3:
                 followingExists = _context.sent;
                 isFollowing.value = followingExists.data === 1 ? true : false;
-                _context.next = 9;
-                return getProfileData;
+                _context.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/userProfile/' + userId.value);
 
-              case 9:
+              case 7:
                 ProfileData = _context.sent;
                 user.value = ProfileData.data.user;
                 tweets.value = ProfileData.data.user.tweets;
@@ -19123,7 +19119,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
                 countFollower.value = ProfileData.data.countFollower;
                 isLoding.value = false;
 
-              case 16:
+              case 14:
               case "end":
                 return _context.stop();
             }
@@ -19734,13 +19730,13 @@ var routes = [{
   name: "userList",
   component: _components_UserList__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '/user-profile/:id',
-  name: 'userProfile',
+  path: "/user-profile/:id",
+  name: "userProfile",
   component: _components_UserProfile__WEBPACK_IMPORTED_MODULE_1__["default"],
   props: true
 }, {
-  path: '/tweet/:id',
-  name: 'tweetShow',
+  path: "/tweet/:id",
+  name: "tweetShow",
   component: _components_TweetShow__WEBPACK_IMPORTED_MODULE_2__["default"],
   props: true
 }];
