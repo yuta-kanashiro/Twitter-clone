@@ -1,12 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import TimeLine from "./components/TimeLine";
 import UserList from "./components/UserList";
 import UserProfile from "./components/UserProfile";
 import TweetShow from "./components/TweetShow";
 
 const routes = [
+    { path: "/", redirect: "/home" },
     {
-        path: "/",
+        path: "/home",
+        name: "timeLine",
+        component: TimeLine
+    },
+    {
+        path: "/userList",
         name: "userList",
         component: UserList
     },

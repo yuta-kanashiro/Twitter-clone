@@ -54,6 +54,7 @@ class Tweet extends Model
         return $this->whereIn('user_id', $loginUser->followings()->pluck('follower_id'))
                     ->orWhere('user_id', $loginUser->id)
                     ->orderBy('created_at', 'desc')
+                    ->with('user')
                     ->get();
     }
 
