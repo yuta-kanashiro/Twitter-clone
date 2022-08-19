@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
@@ -41,5 +42,16 @@ class TweetController extends Controller
     public function getTimeline(): Collection
     {
         return $this->tweet->getTimeline();
+    }
+
+    /**
+     * あるツイートを取得
+     *
+     * @param TweetRequest $request
+    //  * @return array
+     */
+    public function store(TweetRequest $request)
+    {
+        return $this->tweet->createTweet($request);
     }
 }

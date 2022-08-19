@@ -33,6 +33,14 @@ class Tweet extends Model
     }
 
     /**
+     * ある掲示板をいいねしているユーザーのIDを取得
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
+    }
+
+    /**
      * あるツイートとそのユーザーの取得
      * 
      * @return object
@@ -59,11 +67,19 @@ class Tweet extends Model
     }
 
     /**
-     * ある掲示板をいいねしているユーザーのIDを取得
+     * ツイートの投稿
+     * 
+     * @param $request
+     * @return
      */
-    public function likes()
+    public function createTweet($request)
     {
-        return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
+        $this->user_id = auth()->id();
+        // $this->text = $request->text;
+        // $this->save();
+        $this->fill($request->text)->save();
+
+        return $this;
     }
 
     /**

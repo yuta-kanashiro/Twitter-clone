@@ -29,6 +29,14 @@ Route::middleware('auth')->group(function () {
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
 
+    # ツイート関連のルーティング
+    // タイムラインの取得
+    Route::get('/timeLine', [TweetController::class, 'getTimeline']);
+    // ツイート詳細取得
+    Route::get('/tweet/{id}', [TweetController::class, 'show']);
+    // ツイート投稿
+    Route::post('/createTweet', [TweetController::class, 'store']);
+
     # フォロー関連のルーティング
     // フォロー判定
     Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
@@ -44,10 +52,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/like/{id}', [LikeController::class, 'like']);
     // いいねを外す
     Route::post('/unlike/{id}', [LikeController::class, 'unlike']);
-
-    # ツイート関連のルーティング
-    // タイムラインの取得
-    Route::get('/timeLine', [TweetController::class, 'getTimeline']);
-    // ツイート詳細取得
-    Route::get('/tweet/{id}', [TweetController::class, 'show']);
 });
