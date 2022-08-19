@@ -18901,7 +18901,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
-    var tweets = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]); // タイムライン取得
+    var tweets = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
+    var followingExists = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(); // タイムライン取得
 
     var getTimeLine = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18915,9 +18916,12 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
 
               case 2:
                 response = _context.sent;
-                tweets.value = response.data;
+                tweets.value = response.data.tweets;
+                followingExists.value = Boolean(response.data.followingExists); // console.log(response.data.tweets)
 
-              case 4:
+                console.log(response.data.followingExists);
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -18941,6 +18945,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
     });
     return {
       tweets: tweets,
+      followingExists: followingExists,
       format: format
     };
   }
@@ -19287,8 +19292,9 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     var loginUserId = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(); // Numberでidを文字列から数値に変換
 
     var userId = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(Number(props.id));
-    var countFollowing = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
-    var countFollower = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var countFollowings = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var countFollowers = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var countTweets = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var isFollowing = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var isLoding = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
 
@@ -19319,11 +19325,12 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
                 user.value = ProfileData.data.user;
                 tweets.value = ProfileData.data.user.tweets;
                 loginUserId.value = ProfileData.data.loginUserId;
-                countFollowing.value = ProfileData.data.countFollowing;
-                countFollower.value = ProfileData.data.countFollower;
+                countFollowings.value = ProfileData.data.countFollowings;
+                countFollowers.value = ProfileData.data.countFollowers;
+                countTweets.value = ProfileData.data.countTweets;
                 isLoding.value = false;
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -19349,8 +19356,9 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
       user: user,
       tweets: tweets,
       loginUserId: loginUserId,
-      countFollowing: countFollowing,
-      countFollower: countFollower,
+      countFollowings: countFollowings,
+      countFollowers: countFollowers,
+      countTweets: countTweets,
       format: format,
       isFollowing: isFollowing,
       isFollow: isFollow,
@@ -19481,6 +19489,7 @@ var _hoisted_3 = {
   "class": "col-lg-8"
 };
 var _hoisted_4 = {
+  key: 0,
   "class": "card"
 };
 var _hoisted_5 = {
@@ -19513,10 +19522,27 @@ var _hoisted_11 = {
 var _hoisted_12 = {
   "class": "d-block"
 };
+var _hoisted_13 = {
+  key: 1,
+  "class": "text-center"
+};
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "d-block mb-2"
+}, "ツイートがありません", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-info rounded-pill text-white px-4 py-2"
+}, "ユーザーをフォローしてみる", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.followingExists != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card-body d-flex text-black border-bottom",
       key: tweet.id
@@ -19567,7 +19593,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["to"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])]);
+  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: '/userList',
+    "class": "router-link"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_15];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]))])])]);
 }
 
 /***/ }),
@@ -19968,6 +20004,7 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_20 = {
+  key: 1,
   "class": "card"
 };
 var _hoisted_21 = {
@@ -20000,6 +20037,18 @@ var _hoisted_27 = {
 var _hoisted_28 = {
   "class": "d-block"
 };
+var _hoisted_29 = {
+  key: 2,
+  "class": "text-center"
+};
+
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "d-block mb-2"
+}, "ツイートがありません", -1
+/* HOISTED */
+);
+
+var _hoisted_31 = [_hoisted_30];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FollowButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FollowButton");
 
@@ -20023,9 +20072,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "router-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countFollowing), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countFollowings), 1
       /* TEXT */
-      ), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countFollower), 1
+      ), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countFollowers), 1
       /* TEXT */
       ), _hoisted_19])])];
     }),
@@ -20034,7 +20083,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["to"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
+  , ["to"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), $setup.countTweets != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "border-bottom text-center text-muted my-1"
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countTweets) + "ツイート ", 513
+  /* TEXT, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.isLoding]]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card-body d-flex text-black border-bottom",
       key: tweet.id
@@ -20061,7 +20114,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["to"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])]);
+  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, _hoisted_31))])])]);
 }
 
 /***/ }),

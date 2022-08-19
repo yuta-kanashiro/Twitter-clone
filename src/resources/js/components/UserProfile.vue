@@ -28,15 +28,18 @@
                         </div>
                         <router-link :to="'/user-profile/' + user.id + '/follow-list'" class="router-link">
                             <div class="d-flex mt-2">
-                                <div>{{ countFollowing }}<span class="text-muted me-1">フォロー</span></div>
-                                <div>{{ countFollower }}<span class="text-muted">フォロワー</span></div>
+                                <div>{{ countFollowings }}<span class="text-muted me-1">フォロー</span></div>
+                                <div>{{ countFollowers }}<span class="text-muted">フォロワー</span></div>
                             </div>
                         </router-link>
                     </div>
                 </div>
                 
                 <!-- ツイート一覧 -->
-                <div class="card">
+                <div v-if="countTweets != 0" class="card">
+                    <div class="border-bottom text-center text-muted my-1" v-show="!isLoding">
+                        {{ countTweets }}ツイート
+                    </div>
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
                         <router-link :to="'/tweet/' + tweet.id" class="router-link d-flex">
                             <div class="me-2">
@@ -55,6 +58,9 @@
                             </div>
                         </router-link>
                     </div>
+                </div>
+                <div v-else class="text-center">
+                    <span class="d-block mb-2">ツイートがありません</span>
                 </div>
             </div>
         </div>
@@ -81,8 +87,9 @@ export default {
         const loginUserId = ref();
         // Numberでidを文字列から数値に変換
         const userId = ref(Number(props.id));
-        const countFollowing = ref();
-        const countFollower = ref();
+        const countFollowings = ref();
+        const countFollowers = ref();
+        const countTweets = ref();
         const isFollowing = ref();
 
         const isLoding = ref(false);
@@ -102,8 +109,9 @@ export default {
             user.value = ProfileData.data.user
             tweets.value = ProfileData.data.user.tweets
             loginUserId.value = ProfileData.data.loginUserId
-            countFollowing.value = ProfileData.data.countFollowing
-            countFollower.value = ProfileData.data.countFollower
+            countFollowings.value = ProfileData.data.countFollowings
+            countFollowers.value = ProfileData.data.countFollowers
+            countTweets.value = ProfileData.data.countTweets
 
             isLoding.value = false
         }
@@ -122,8 +130,9 @@ export default {
             user,
             tweets,
             loginUserId,
-            countFollowing,
-            countFollower,
+            countFollowings,
+            countFollowers,
+            countTweets,
             format,
             isFollowing,
             isFollow,

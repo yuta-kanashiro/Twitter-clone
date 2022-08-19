@@ -194,4 +194,14 @@ class User extends Authenticatable
     {
         $this->likes()->detach($likeTweetId);
     }
+
+    /**
+     * ツイートー数カウント
+     * 
+     * @return int
+     */
+    public function countTweets(): int
+    {
+        return $this->tweets()->count();
+    }
 }

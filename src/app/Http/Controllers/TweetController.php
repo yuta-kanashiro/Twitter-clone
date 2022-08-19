@@ -36,9 +36,9 @@ class TweetController extends Controller
     /**
     * 全ユーザー情報の取得
     * 
-    * @return Collection
+    * @return array
     */
-    public function getTimeline(): Collection
+    public function getTimeline(): array
     {
         return $this->tweet->getTimeline();
     }

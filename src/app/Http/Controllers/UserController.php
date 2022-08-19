@@ -39,8 +39,9 @@ class UserController extends Controller
         return [
             'user' => $user,
             'loginUserId' => Auth::id(),
-            'countFollowing' => $user->countFollowings(),
-            'countFollower' => $user->countFollowers()
+            'countFollowings' => $user->countFollowings(),
+            'countFollowers' => $user->countFollowers(),
+            'countTweets' => $user->countTweets()
         ];
     }
 

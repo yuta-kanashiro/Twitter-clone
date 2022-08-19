@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card">
+                <div v-if="followingExists != 0" class="card">
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
                         <div class="me-2">
                             <router-link :to="'/user-profile/' + tweet.user.id" class="router-link">
@@ -26,6 +26,12 @@
                         </div>
                     </div>
                 </div>
+                <div v-else class="text-center">
+                    <span class="d-block mb-2">ツイートがありません</span>
+                    <router-link :to="'/userList'" class="router-link">
+                        <button class="btn btn-info rounded-pill text-white px-4 py-2">ユーザーをフォローしてみる</button>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
@@ -40,11 +46,15 @@ dayjs.locale("ja");
 export default {
     setup(){
         const tweets = ref([]);
+        const followingExists = ref()
 
         // タイムライン取得
         const getTimeLine = async() => {
             const response = await axios.get('/api/timeLine')
-            tweets.value = response.data
+            tweets.value = response.data.tweets
+            followingExists.value = Boolean(response.data.followingExists)
+            // console.log(response.data.tweets)
+            console.log(response.data.followingExists)
         }
 
         // 日付のフォーマット
@@ -59,6 +69,7 @@ export default {
 
         return{
             tweets,
+            followingExists,
             format
         }
     }

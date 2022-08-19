@@ -53,17 +53,22 @@ class Tweet extends Model
     /**
      * タイムラインの取得(フォローしているユーザーのツイートと自身のツイートを取得)
      * 
-     * @return Collection
+     * @return array
      */
-    public function getTimeline(): Collection
+    public function getTimeline(): array
     {
         $loginUser = $loginUser = User::find(auth()->id());
 
-        return $this->whereIn('user_id', $loginUser->followings()->pluck('follower_id'))
+        $tweets = $this->whereIn('user_id', $loginUser->followings()->pluck('follower_id'))
                     ->orWhere('user_id', $loginUser->id)
                     ->orderBy('created_at', 'desc')
                     ->with('user')
                     ->get();
+
+        return [
+            'tweets' => $tweets,
+            'followingExists' => $loginUser->countFollowings()
+        ];
     }
 
     /**
