@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button type="button" class="btn btn-outline-info rounded-pill" v-if="!isFollowing" @click="follow">フォロー</button>
-        <button type="button" class="btn btn-info text-white rounded-pill" v-else @click="unfollow">フォロー中</button>
+        <button type="button" class="btn btn-outline-info rounded-pill" v-if="!isFollowing" @click="followAction">フォロー</button>
+        <button type="button" class="btn btn-info text-white rounded-pill" v-else @click="followAction">フォロー中</button>
     </div>
 </template>
 
@@ -22,20 +22,44 @@ export default {
             context.emit('emitFollow', !props.isFollowing);
         }
 
-        // フォローする
-        const follow = async() => {
-            try {
-                await axios.post('/api/follow/' + props.userId)
-                execEmit()
-            } catch (error) {
-                alert("エラーが発生しました。")
-            }
-        }
+        // const follow = async() => {
+        //     try {
+        //         await axios.post('/api/follow/' + props.userId)
+        //         execEmit()
+        //     } catch (error) {
+        //         alert("エラーが発生しました。")
+        //     }
+        // }
 
-        // フォローを外す
-        const unfollow = async() => {
+        // const unfollow = async() => {
+        //     try {
+        //         await axios.post('/api/unfollow/' + props.userId)
+        //         execEmit()
+        //     } catch (error) {
+        //         alert("エラーが発生しました。")
+        //     }
+        // }
+
+        const followAction = async() => {
+            // if (props.isFollowing === false) {
+            //     // フォローする
+            //     try {
+            //         await axios.post('/api/follow/' + props.userId)
+            //         execEmit()
+            //     } catch (error) {
+            //         alert("エラーが発生しました。")
+            //     }
+            // } else {
+            //     // フォローを外す
+            //     try {
+            //         await axios.post('/api/unfollow/' + props.userId)
+            //         execEmit()
+            //     } catch (error) {
+            //         alert("エラーが発生しました。")
+            //     }
+            // }
             try {
-                await axios.post('/api/unfollow/' + props.userId)
+                await axios.post('/api/followAction/' + props.userId)
                 execEmit()
             } catch (error) {
                 alert("エラーが発生しました。")
@@ -44,9 +68,9 @@ export default {
 
         return{
             user,
-            follow,
-            unfollow,
-            execEmit
+            // follow,
+            // unfollow,
+            followAction
         }
     }
 }

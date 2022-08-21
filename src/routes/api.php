@@ -43,15 +43,19 @@ Route::middleware('auth')->group(function () {
     // フォロー判定
     Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
     // フォローする
-    Route::post('/follow/{id}', [FollowController::class, 'follow']);
-    // フォローを外す
-    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
+    // Route::post('/follow/{id}', [FollowController::class, 'follow']);
+    // // フォローを外す
+    // Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
+    // フォローする/外す
+    Route::post('/followAction/{id}', [FollowController::class, 'followAction']);
 
     # いいね関連のルーティング
     // いいね判定
     Route::get('/isLike/{id}', [LikeController::class, 'isLike']);
     // いいねする
-    Route::post('/like/{id}', [LikeController::class, 'like']);
-    // いいねを外す
-    Route::post('/unlike/{id}', [LikeController::class, 'unlike']);
+    // Route::post('/like/{id}', [LikeController::class, 'like']);
+    // // いいねを外す
+    // Route::post('/unlike/{id}', [LikeController::class, 'unlike']);
+    // いいねする/外す
+    Route::post('/likeAction/{id}', [LikeController::class, 'likeAction']);
 });

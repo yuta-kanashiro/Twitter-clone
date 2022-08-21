@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class Tweet extends Model
@@ -43,11 +44,12 @@ class Tweet extends Model
     /**
      * あるツイートとそのユーザーの取得
      * 
+     * @param int $tweetId
      * @return object
      */
-    public function getTweet($id): object
+    public function getTweet(int $tweetId): object
     {
-        return $this->with('user')->find($id);
+        return $this->with('user')->find($tweetId);
     }
 
     /**
@@ -65,19 +67,26 @@ class Tweet extends Model
                     ->with('user')
                     ->get();
 
-        return [
-            'tweets' => $tweets,
-            'followingExists' => $loginUser->countFollowings()
-        ];
+        if($tweets->isEmpty()){
+            return [
+                'tweets' => $tweets,
+                'tweetExists' => false
+            ];
+        }else{
+            return [
+                'tweets' => $tweets,
+                'tweetExists' => true
+            ];
+        }
     }
 
     /**
      * ツイートの投稿
      * 
-     * @param $request
+     * @param Request $request
      * @return object
      */
-    public function createTweet($request): object
+    public function createTweet(Request $request): object
     {
         $this->user_id = auth()->id();
         $this->text = $request->text;

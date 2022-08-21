@@ -9,7 +9,7 @@ class LikeController extends Controller
     /**
     * いいね済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
-    * @param  int $likeTweetId
+    * @param int $likeTweetId
     * @return bool
     */
     public function isLike(int $likeTweetId): bool
@@ -21,30 +21,46 @@ class LikeController extends Controller
         return $likeExists;
     }
 
+    // /**
+    // * いいねする
+    // * 
+    // * @param int $likeTweetId
+    // */
+    // public function like(int $likeTweetId)
+    // {
+    //     $loginUser = User::find(auth()->id());
+
+    //     if(!$this->isLike($likeTweetId)){
+    //         $loginUser->like($likeTweetId);
+    //     }
+    // }
+
+    // /**
+    // * いいねを外す
+    // * 
+    // * @param int $likeTweetId
+    // */
+    // public function unlike(int $likeTweetId)
+    // {
+    //     $loginUser = User::find(auth()->id());
+
+    //     if($this->isLike($likeTweetId)){
+    //         $loginUser->unlike($likeTweetId);
+    //     }
+    // }
+
     /**
-    * いいねする
+    * いいねをする/外す
     * 
-    * @param  int $likeTweetId
+    * @param int $likeTweetId
     */
-    public function like(int $likeTweetId)
+    public function likeAction(int $likeTweetId)
     {
         $loginUser = User::find(auth()->id());
 
         if(!$this->isLike($likeTweetId)){
             $loginUser->like($likeTweetId);
-        }
-    }
-
-    /**
-    * いいねを外す
-    * 
-    * @param  int $likeTweetId
-    */
-    public function unlike(int $likeTweetId)
-    {
-        $loginUser = User::find(auth()->id());
-
-        if($this->isLike($likeTweetId)){
+        }else{
             $loginUser->unlike($likeTweetId);
         }
     }

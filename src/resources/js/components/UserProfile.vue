@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-8" v-show="!isLoading">
                 <!-- ユーザープロフィール -->
-                <div class="card mb-5" v-if="!isLoding">
+                <div class="card mb-5">
                     <div class="card-body text-black" style="gap:0 12px">
                         <div class="mb-2">
                             <div v-if="!user.profile_image">
@@ -37,7 +37,7 @@
                 
                 <!-- ツイート一覧 -->
                 <div v-if="countTweets != 0" class="card">
-                    <div class="border-bottom text-center text-muted my-1" v-show="!isLoding">
+                    <div class="border-bottom text-center text-muted my-1">
                         {{ countTweets }}ツイート
                     </div>
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
@@ -91,16 +91,11 @@ export default {
         const countFollowers = ref();
         const countTweets = ref();
         const isFollowing = ref();
-
-        const isLoding = ref(false);
-
-        const isFollow = (followData) => {
-            isFollowing.value = followData
-        }
+        const isLoading = ref(false);
 
         // あるユーザーの情報を取得
         const getUserData = async () => {
-            isLoding.value = true
+            isLoading.value = true
 
             const followingExists = await axios.get('/api/isFollowing/' + userId.value)
             isFollowing.value = Boolean(followingExists.data)
@@ -113,13 +108,16 @@ export default {
             countFollowers.value = ProfileData.data.countFollowers
             countTweets.value = ProfileData.data.countTweets
 
-            isLoding.value = false
+            isLoading.value = false
         }
 
         // 日付のフォーマット
-        const format = (data) => {
-            let created_at = dayjs(data).format("YYYY年MM月DD日");
-            return created_at;
+        const format = (created_at) => {
+            return dayjs(created_at).format("YYYY年MM月DD日 h:mm A");
+        }
+
+        const isFollow = (followData) => {
+            isFollowing.value = followData
         }
 
         onMounted(() => {
@@ -133,10 +131,10 @@ export default {
             countFollowings,
             countFollowers,
             countTweets,
-            format,
             isFollowing,
-            isFollow,
-            isLoding
+            isLoading,
+            format,
+            isFollow
         }
     }
 }

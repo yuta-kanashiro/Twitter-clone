@@ -7,7 +7,7 @@
                         <router-link :to="'/user-profile/' + user.id" class="router-link d-flex mb-3">
                             <div class="d-flex">
                                 <div class="me-2">
-                                    <div v-if="user.profile_image === null">
+                                    <div v-if="!user.profile_image">
                                         <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="50" height="50">
                                     </div>
                                     <div v-else>
@@ -72,9 +72,8 @@ export default {
         }
 
         // 日付のフォーマット
-        const format = (data) => {
-            let created_at = dayjs(data).format("YYYY年MM月DD日 h:mm A");
-            return created_at;
+        const format = (created_at) => {
+            return dayjs(created_at).format("YYYY年MM月DD日 h:mm A");
         }
 
         const getLikeData = (likeData) => {

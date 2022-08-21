@@ -170,7 +170,7 @@ class User extends Authenticatable
      */
     public function isLike($likeTweetId): bool
     {
-        //  いいね対象の掲示板ID（$likeBulletinId）が、すでにいいねしているbulletin_idと重複していないかどうかを判定
+        //  いいね対象の掲示板ID（$likeTweetId）が、すでにいいねしているtweet_idと重複していないかどうかを判定
         return $this->likes()->where('tweet_id', $likeTweetId)->exists();
     }
 

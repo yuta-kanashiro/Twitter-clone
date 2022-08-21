@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div v-if="followingExists != 0" class="card">
+            <div class="col-lg-8" v-show="!isLoading">
+                <div v-if="tweetExists" class="card">
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
                         <div class="me-2">
                             <router-link :to="'/user-profile/' + tweet.user.id" class="router-link">
@@ -46,21 +46,20 @@ dayjs.locale("ja");
 export default {
     setup(){
         const tweets = ref([]);
-        const followingExists = ref()
+        const tweetExists = ref()
+        const isLoading = ref(false);
 
-        // タイムライン取得
-        const getTimeLine = async() => {
+        const getTimeLine = async () => {
+            isLoading.value = true
             const response = await axios.get('/api/timeLine')
             tweets.value = response.data.tweets
-            followingExists.value = Boolean(response.data.followingExists)
-            // console.log(response.data.tweets)
-            console.log(response.data.followingExists)
+            tweetExists.value = Boolean(response.data.tweetExists)
+            isLoading.value = false
         }
 
         // 日付のフォーマット
-        const format = (data) => {
-            let created_at = dayjs(data).format("YYYY年MM月DD日 h:mm A");
-            return created_at;
+        const format = (created_at) => {
+            return dayjs(created_at).format("YYYY年MM月DD日 h:mm A");
         }
 
         onMounted(() => {
@@ -69,7 +68,8 @@ export default {
 
         return{
             tweets,
-            followingExists,
+            tweetExists,
+            isLoading,
             format
         }
     }

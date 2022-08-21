@@ -23,30 +23,46 @@ class FollowController extends Controller
         return $response;
     }
 
+    // /**
+    // * フォローする
+    // * 
+    // * @param int $followUserId
+    // */
+    // public function follow(int $followUserId)
+    // {
+    //     $loginUser = User::find(auth()->id());
+
+    //     if(!$this->isFollowing($followUserId)){
+    //         $loginUser->follow($followUserId);
+    //     }
+    // }
+
+    // /**
+    // * フォローを外す
+    // * 
+    // * @param int $followUserId
+    // */
+    // public function unfollow(int $followUserId)
+    // {
+    //     $loginUser = User::find(auth()->id());
+
+    //     if($this->isFollowing($followUserId)){
+    //         $loginUser->unfollow($followUserId);
+    //     }
+    // }
+
     /**
-    * フォローする
+    * フォローする/外す
     * 
-    * @param  int $followUserId
+    * @param int $followUserId
     */
-    public function follow(int $followUserId)
+    public function followAction(int $followUserId)
     {
         $loginUser = User::find(auth()->id());
 
         if(!$this->isFollowing($followUserId)){
             $loginUser->follow($followUserId);
-        }
-    }
-
-    /**
-    * フォローを外す
-    * 
-    * @param  int $followUserId
-    */
-    public function unfollow(int $followUserId)
-    {
-        $loginUser = User::find(auth()->id());
-
-        if($this->isFollowing($followUserId)){
+        }else{
             $loginUser->unfollow($followUserId);
         }
     }

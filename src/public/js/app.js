@@ -18683,10 +18683,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var execEmit = function execEmit() {
       context.emit('emitFollow', !props.isFollowing);
-    }; // フォローする
+    }; // const follow = async() => {
+    //     try {
+    //         await axios.post('/api/follow/' + props.userId)
+    //         execEmit()
+    //     } catch (error) {
+    //         alert("エラーが発生しました。")
+    //     }
+    // }
+    // const unfollow = async() => {
+    //     try {
+    //         await axios.post('/api/unfollow/' + props.userId)
+    //         execEmit()
+    //     } catch (error) {
+    //         alert("エラーが発生しました。")
+    //     }
+    // }
 
 
-    var follow = /*#__PURE__*/function () {
+    var followAction = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -18694,7 +18709,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/follow/' + props.userId);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/followAction/' + props.userId);
 
               case 3:
                 execEmit();
@@ -18714,50 +18729,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 6]]);
       }));
 
-      return function follow() {
+      return function followAction() {
         return _ref.apply(this, arguments);
-      };
-    }(); // フォローを外す
-
-
-    var unfollow = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/unfollow/' + props.userId);
-
-              case 3:
-                execEmit();
-                _context2.next = 9;
-                break;
-
-              case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                alert("エラーが発生しました。");
-
-              case 9:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 6]]);
-      }));
-
-      return function unfollow() {
-        return _ref2.apply(this, arguments);
       };
     }();
 
     return {
       user: user,
-      follow: follow,
-      unfollow: unfollow,
-      execEmit: execEmit
+      // follow,
+      // unfollow,
+      followAction: followAction
     };
   }
 });
@@ -18794,9 +18775,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   setup: function setup(props, context) {
     var execEmit = function execEmit() {
       context.emit('emitLike', !props.isLike);
-    };
+    }; // const like = async () => {
+    //     try {
+    //         await axios.post('/api/like/' + props.tweetId)
+    //         execEmit()
+    //     } catch (error) {
+    //         alert("エラーが発生しました。")
+    //     }
+    // }
+    // const unlike = async() => {
+    //     try {
+    //         await axios.post('/api/unlike/' + props.tweetId)
+    //         execEmit()
+    //     } catch (error) {
+    //         alert("エラーが発生しました。")
+    //     }
+    // }
 
-    var like = /*#__PURE__*/function () {
+
+    var likeAction = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -18804,7 +18801,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/like/' + props.tweetId);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/likeAction/' + props.tweetId);
 
               case 3:
                 execEmit();
@@ -18824,47 +18821,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[0, 6]]);
       }));
 
-      return function like() {
+      return function likeAction() {
         return _ref.apply(this, arguments);
       };
     }();
 
-    var unlike = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/unlike/' + props.tweetId);
-
-              case 3:
-                execEmit();
-                _context2.next = 9;
-                break;
-
-              case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                alert("エラーが発生しました。");
-
-              case 9:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 6]]);
-      }));
-
-      return function unlike() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
     return {
-      like: like,
-      unlike: unlike
+      // like,
+      // unlike,
+      likeAction: likeAction
     };
   }
 });
@@ -18902,7 +18867,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var tweets = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
-    var followingExists = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(); // タイムライン取得
+    var tweetExists = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
+    var isLoading = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
 
     var getTimeLine = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18911,17 +18877,17 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                isLoading.value = true;
+                _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/timeLine');
 
-              case 2:
+              case 3:
                 response = _context.sent;
                 tweets.value = response.data.tweets;
-                followingExists.value = Boolean(response.data.followingExists); // console.log(response.data.tweets)
+                tweetExists.value = Boolean(response.data.tweetExists);
+                isLoading.value = false;
 
-                console.log(response.data.followingExists);
-
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -18935,9 +18901,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
     }(); // 日付のフォーマット
 
 
-    var format = function format(data) {
-      var created_at = dayjs__WEBPACK_IMPORTED_MODULE_2___default()(data).format("YYYY年MM月DD日 h:mm A");
-      return created_at;
+    var format = function format(created_at) {
+      return dayjs__WEBPACK_IMPORTED_MODULE_2___default()(created_at).format("YYYY年MM月DD日 h:mm A");
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
@@ -18945,7 +18910,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_2___default().locale("ja");
     });
     return {
       tweets: tweets,
-      followingExists: followingExists,
+      tweetExists: tweetExists,
+      isLoading: isLoading,
       format: format
     };
   }
@@ -18978,7 +18944,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  setup: function setup(props, context) {
+  setup: function setup() {
     var showContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
     var loginUser = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(); // ログインユーザーの情報を取得
 
@@ -19008,66 +18974,76 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return function getLoginUser() {
         return _ref.apply(this, arguments);
       };
-    }(); // モーダルウィンドウを表示する
+    }(); // // モーダルウィンドウを表示する
+    // const openModal = () => {
+    //     showContent.value = true;
+    //     getLoginUser()
+    // };
+    // // モーダルウィンドウを閉じる
+    // const closeModal = () => {
+    //     showContent.value = false;
+    // }; 
 
 
-    var openModal = function openModal() {
-      showContent.value = true;
-      getLoginUser();
-    }; // モーダルウィンドウを閉じる
-
-
-    var closeModal = function closeModal() {
-      showContent.value = false;
-    }; // ツイートを投稿
+    var modalAction = function modalAction() {
+      showContent.value = !showContent.value;
+    }; // // ツイートを投稿
+    // const createTweet = async (e) => {
+    //     btn.disabled = true;
+    //     const tweetData = new FormData();
+    //     const tweetText = e.target.text.value;
+    //     tweetData.append("text", tweetText);
+    //     try {
+    //         await axios.post('/api/createTweet', tweetData)
+    //     } catch (error) {
+    //         console.log(error)
+    //         alert("エラーが発生しました。")
+    //     }
+    // }
 
 
     var createTweet = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
-        var tweetData, tweetText;
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var tweetData;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 btn.disabled = true;
-                tweetData = new FormData();
-                tweetText = e.target.text.value;
-                tweetData.append("text", tweetText);
-                _context2.prev = 4;
-                _context2.next = 7;
+                tweetData = new FormData(form);
+                _context2.prev = 2;
+                _context2.next = 5;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/createTweet', tweetData);
 
-              case 7:
-                _context2.next = 13;
+              case 5:
+                _context2.next = 11;
                 break;
 
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](4);
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](2);
                 console.log(_context2.t0);
                 alert("エラーが発生しました。");
 
-              case 13:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[4, 9]]);
+        }, _callee2, null, [[2, 7]]);
       }));
 
-      return function createTweet(_x) {
+      return function createTweet() {
         return _ref2.apply(this, arguments);
       };
-    }(); // onMounted(() => {
-    //     getLoginUser()
-    // })
-
+    }();
 
     return {
       loginUser: loginUser,
       showContent: showContent,
-      openModal: openModal,
-      closeModal: closeModal,
+      // openModal,
+      // closeModal,
+      modalAction: modalAction,
       createTweet: createTweet
     };
   }
@@ -19158,9 +19134,8 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     }(); // 日付のフォーマット
 
 
-    var format = function format(data) {
-      var created_at = dayjs__WEBPACK_IMPORTED_MODULE_3___default()(data).format("YYYY年MM月DD日 h:mm A");
-      return created_at;
+    var format = function format(created_at) {
+      return dayjs__WEBPACK_IMPORTED_MODULE_3___default()(created_at).format("YYYY年MM月DD日 h:mm A");
     };
 
     var getLikeData = function getLikeData(likeData) {
@@ -19296,12 +19271,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     var countFollowers = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var countTweets = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var isFollowing = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
-    var isLoding = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
-
-    var isFollow = function isFollow(followData) {
-      isFollowing.value = followData;
-    }; // あるユーザーの情報を取得
-
+    var isLoading = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false); // あるユーザーの情報を取得
 
     var getUserData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -19310,7 +19280,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                isLoding.value = true;
+                isLoading.value = true;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/isFollowing/' + userId.value);
 
@@ -19328,7 +19298,7 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
                 countFollowings.value = ProfileData.data.countFollowings;
                 countFollowers.value = ProfileData.data.countFollowers;
                 countTweets.value = ProfileData.data.countTweets;
-                isLoding.value = false;
+                isLoading.value = false;
 
               case 15:
               case "end":
@@ -19344,9 +19314,12 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
     }(); // 日付のフォーマット
 
 
-    var format = function format(data) {
-      var created_at = dayjs__WEBPACK_IMPORTED_MODULE_3___default()(data).format("YYYY年MM月DD日");
-      return created_at;
+    var format = function format(created_at) {
+      return dayjs__WEBPACK_IMPORTED_MODULE_3___default()(created_at).format("YYYY年MM月DD日 h:mm A");
+    };
+
+    var isFollow = function isFollow(followData) {
+      isFollowing.value = followData;
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
@@ -19359,10 +19332,10 @@ dayjs__WEBPACK_IMPORTED_MODULE_3___default().locale("ja");
       countFollowings: countFollowings,
       countFollowers: countFollowers,
       countTweets: countTweets,
-      format: format,
       isFollowing: isFollowing,
-      isFollow: isFollow,
-      isLoding: isLoding
+      isLoading: isLoading,
+      format: format,
+      isFollow: isFollow
     };
   }
 });
@@ -19414,14 +19387,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "btn btn-outline-info rounded-pill",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.follow && $setup.follow.apply($setup, arguments);
+      return $setup.followAction && $setup.followAction.apply($setup, arguments);
     })
   }, "フォロー")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
     type: "button",
     "class": "btn btn-info text-white rounded-pill",
     onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.unfollow && $setup.unfollow.apply($setup, arguments);
+      return $setup.followAction && $setup.followAction.apply($setup, arguments);
     })
   }, "フォロー中"))]);
 }
@@ -19450,14 +19423,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "far fa-heart heart",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.like && $setup.like.apply($setup, arguments);
+      return $setup.likeAction && $setup.likeAction.apply($setup, arguments);
     })
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.isLike ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
     key: 1,
     type: "button",
     "class": "fa fa-heart text-danger heart",
     onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.unlike && $setup.unlike.apply($setup, arguments);
+      return $setup.likeAction && $setup.likeAction.apply($setup, arguments);
     })
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
@@ -19542,7 +19515,7 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.followingExists != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.tweetExists ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card-body d-flex text-black border-bottom",
       key: tweet.id
@@ -19603,7 +19576,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]))])])]);
+  })]))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.isLoading]])])]);
 }
 
 /***/ }),
@@ -19661,7 +19636,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
   type: "text",
   name: "text",
-  id: "form",
+  id: "text",
   "class": "form-control",
   placeholder: "ツイートしてみよう",
   maxlength: "140",
@@ -19687,9 +19662,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-plus-circle tweet-btn",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.openModal && $setup.openModal.apply($setup, arguments);
+      return $setup.modalAction && $setup.modalAction.apply($setup, arguments);
     })
   }), $setup.showContent ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    id: "form",
     onSubmit: _cache[2] || (_cache[2] = function () {
       return $setup.createTweet && $setup.createTweet.apply($setup, arguments);
     })
@@ -19697,7 +19673,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "btn btn-dark rounded-pill",
     onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
+      return $setup.modalAction && $setup.modalAction.apply($setup, arguments);
     })
   }, "閉じる")])], 32
   /* HYDRATE_EVENTS */
@@ -19793,7 +19769,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "router-link d-flex mb-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [$setup.user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, _hoisted_10)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [!$setup.user.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, _hoisted_10)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
       /* TEXT */
@@ -19937,7 +19913,6 @@ var _hoisted_3 = {
   "class": "col-lg-8"
 };
 var _hoisted_4 = {
-  key: 0,
   "class": "card mb-5"
 };
 var _hoisted_5 = {
@@ -20004,17 +19979,20 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_20 = {
-  key: 1,
+  key: 0,
   "class": "card"
 };
 var _hoisted_21 = {
-  "class": "me-2"
+  "class": "border-bottom text-center text-muted my-1"
 };
 var _hoisted_22 = {
+  "class": "me-2"
+};
+var _hoisted_23 = {
   key: 0
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "rounded-circle border",
   src: _img_default_png__WEBPACK_IMPORTED_MODULE_1__["default"],
   alt: "プロフィール画像",
@@ -20024,37 +20002,37 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_24 = [_hoisted_23];
-var _hoisted_25 = {
+var _hoisted_25 = [_hoisted_24];
+var _hoisted_26 = {
   key: 1
 };
-var _hoisted_26 = {
+var _hoisted_27 = {
   "class": "text-muted ms-1"
 };
-var _hoisted_27 = {
+var _hoisted_28 = {
   "class": "text-muted float-end"
 };
-var _hoisted_28 = {
+var _hoisted_29 = {
   "class": "d-block"
 };
-var _hoisted_29 = {
-  key: 2,
+var _hoisted_30 = {
+  key: 1,
   "class": "text-center"
 };
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "d-block mb-2"
 }, "ツイートがありません", -1
 /* HOISTED */
 );
 
-var _hoisted_31 = [_hoisted_30];
+var _hoisted_32 = [_hoisted_31];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_FollowButton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FollowButton");
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ユーザープロフィール "), !$setup.isLoding ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [!$setup.user.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ユーザープロフィール "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [!$setup.user.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
   /* TEXT */
@@ -20083,11 +20061,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["to"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), $setup.countTweets != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "border-bottom text-center text-muted my-1"
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countTweets) + "ツイート ", 513
-  /* TEXT, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.isLoding]]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
+  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), $setup.countTweets != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.countTweets) + "ツイート ", 1
+  /* TEXT */
+  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card-body d-flex text-black border-bottom",
       key: tweet.id
@@ -20096,13 +20072,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "router-link d-flex"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [!$setup.user.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, _hoisted_24)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [!$setup.user.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, _hoisted_25)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_26, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.format(tweet.created_at)), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.format(tweet.created_at)), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tweet.text), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tweet.text), 1
         /* TEXT */
         )])];
       }),
@@ -20114,7 +20090,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["to"])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_29, _hoisted_31))])])]);
+  ))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_30, _hoisted_32))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.isLoading]])])]);
 }
 
 /***/ }),
@@ -25504,7 +25482,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ni {\n    font-size:1.5em;\n}\n.heart:active {\n    -webkit-animation: small 0.1s;\n            animation: small 0.1s;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n@-webkit-keyframes small \n{\n100% {transform: scale(0.9);}\n}\n@keyframes small \n{\n100% {transform: scale(0.9);}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.heart {\n    font-size:1.5em;\n}\n.heart:active {\n    -webkit-animation: small 0.1s;\n            animation: small 0.1s;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n@-webkit-keyframes small \n{\n100% {transform: scale(0.9);}\n}\n@keyframes small \n{\n100% {transform: scale(0.9);}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -25528,7 +25506,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay{\n    /*　要素を重ねた時の順番　*/\n    z-index:1;\n    /*　画面全体を覆う設定　*/\n    position:fixed;\n    top:0;\n    left:0;\n    width:100%;\n    height:100%;\n    background-color:rgba(0,0,0,0.5);\n    /*　画面の中央に要素を表示させる設定　*/\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n#content{\n    z-index:2;\n    padding: 1em;\n    margin: 1em;\n    max-width: 500px;\n    /* width: 70%; */\n    background:#fff;\n    border-radius: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay{\n    z-index: 1;\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.5);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n#content{\n    z-index: 2;\n    padding: 1em;\n    margin: 1em;\n    max-width: 500px;\n    background: #fff;\n    border-radius: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

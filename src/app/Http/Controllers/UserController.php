@@ -52,8 +52,6 @@ class UserController extends Controller
      */
     public function getLoginUser(): object
     {
-        $loginUser = auth()->user();
-
-        return $loginUser;
+        return auth()->user();
     }
 }
