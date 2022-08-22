@@ -1,7 +1,6 @@
 <template>
     <div class="d-flex justify-content-center">
-        <i type="button" v-if="!isLike" class="far fa-heart heart" @click="likeAction"></i>
-        <i type="button" v-if="isLike" class="fa fa-heart text-danger heart" @click="likeAction"></i>
+        <i type="button" class="heart" :class="[ isLike ? 'fa fa-heart text-danger' : 'far fa-heart']" @click="likeAction"></i>
     </div>
 </template>
 

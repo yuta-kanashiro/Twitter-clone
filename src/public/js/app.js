@@ -19361,21 +19361,15 @@ var _hoisted_1 = {
   "class": "d-flex justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$props.isLike ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
-    key: 0,
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     type: "button",
-    "class": "far fa-heart heart",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["heart", [$props.isLike ? 'fa fa-heart text-danger' : 'far fa-heart']]),
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.likeAction && $setup.likeAction.apply($setup, arguments);
     })
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.isLike ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", {
-    key: 1,
-    type: "button",
-    "class": "fa fa-heart text-danger heart",
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.likeAction && $setup.likeAction.apply($setup, arguments);
-    })
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, null, 2
+  /* CLASS */
+  )]);
 }
 
 /***/ }),
