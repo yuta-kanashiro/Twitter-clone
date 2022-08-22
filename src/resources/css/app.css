@@ -3,7 +3,30 @@
     color: black
 }
 
-.tweet-btn{
+.follow {
+    background-color: white;
+    color: rgb(0, 225, 255);
+    border-color: rgb(0, 225, 255);
+}
+
+.following {
+    color: white;
+    background-color: rgb(0, 217, 255);;
+    /* border: 2px solid transparent; */
+}
+
+.follow:hover {
+    color: white;
+    background-color: rgb(140, 245, 248);;
+}
+
+.following:hover {
+    color: white;
+    background-color: rgb(113, 234, 255);;
+    /* border: 2px solid transparent; */
+}
+
+.tweet-btn {
     position: fixed;
     right: 35px;
     bottom: 35px;

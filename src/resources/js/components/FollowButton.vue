@@ -1,7 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-outline-info rounded-pill" v-if="!isFollowing" @click="followAction">フォロー</button>
-        <button type="button" class="btn btn-info text-white rounded-pill" v-else @click="followAction">フォロー中</button>
+        <button type="button" class="btn rounded-pill" :class="[ isFollowing ? 'following' : 'follow' ]" @click="followAction">{{ isFollowing ? "フォロー中" : "フォロー" }}</button>
     </div>
 </template>
 
@@ -22,42 +21,7 @@ export default {
             context.emit('emitFollow', !props.isFollowing);
         }
 
-        // const follow = async() => {
-        //     try {
-        //         await axios.post('/api/follow/' + props.userId)
-        //         execEmit()
-        //     } catch (error) {
-        //         alert("エラーが発生しました。")
-        //     }
-        // }
-
-        // const unfollow = async() => {
-        //     try {
-        //         await axios.post('/api/unfollow/' + props.userId)
-        //         execEmit()
-        //     } catch (error) {
-        //         alert("エラーが発生しました。")
-        //     }
-        // }
-
         const followAction = async() => {
-            // if (props.isFollowing === false) {
-            //     // フォローする
-            //     try {
-            //         await axios.post('/api/follow/' + props.userId)
-            //         execEmit()
-            //     } catch (error) {
-            //         alert("エラーが発生しました。")
-            //     }
-            // } else {
-            //     // フォローを外す
-            //     try {
-            //         await axios.post('/api/unfollow/' + props.userId)
-            //         execEmit()
-            //     } catch (error) {
-            //         alert("エラーが発生しました。")
-            //     }
-            // }
             try {
                 await axios.post('/api/followAction/' + props.userId)
                 execEmit()
@@ -68,8 +32,6 @@ export default {
 
         return{
             user,
-            // follow,
-            // unfollow,
             followAction
         }
     }

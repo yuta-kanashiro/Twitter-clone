@@ -19,42 +19,7 @@ export default {
             context.emit('emitLike', !props.isLike);
         }
 
-        // const like = async () => {
-        //     try {
-        //         await axios.post('/api/like/' + props.tweetId)
-        //         execEmit()
-        //     } catch (error) {
-        //         alert("エラーが発生しました。")
-        //     }
-        // }
-
-        // const unlike = async() => {
-        //     try {
-        //         await axios.post('/api/unlike/' + props.tweetId)
-        //         execEmit()
-        //     } catch (error) {
-        //         alert("エラーが発生しました。")
-        //     }
-        // }
-
         const likeAction = async() => {
-            // if (props.isLike === false) {
-            //     // いいねする
-            //     try {
-            //         await axios.post('/api/like/' + props.tweetId)
-            //         execEmit()
-            //     } catch (error) {
-            //         alert("エラーが発生しました。")
-            //     }
-            // } else {
-            //     // いいねを外す
-            //     try {
-            //         await axios.post('/api/unlike/' + props.tweetId)
-            //         execEmit()
-            //     } catch (error) {
-            //         alert("エラーが発生しました。")
-            //     }
-            // }
             try {
                 await axios.post('/api/likeAction/' + props.tweetId)
                 execEmit()
@@ -64,8 +29,6 @@ export default {
         }
 
         return {
-            // like,
-            // unlike,
             likeAction
         }
     }

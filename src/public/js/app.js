@@ -18683,23 +18683,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var execEmit = function execEmit() {
       context.emit('emitFollow', !props.isFollowing);
-    }; // const follow = async() => {
-    //     try {
-    //         await axios.post('/api/follow/' + props.userId)
-    //         execEmit()
-    //     } catch (error) {
-    //         alert("エラーが発生しました。")
-    //     }
-    // }
-    // const unfollow = async() => {
-    //     try {
-    //         await axios.post('/api/unfollow/' + props.userId)
-    //         execEmit()
-    //     } catch (error) {
-    //         alert("エラーが発生しました。")
-    //     }
-    // }
-
+    };
 
     var followAction = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18736,8 +18720,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     return {
       user: user,
-      // follow,
-      // unfollow,
       followAction: followAction
     };
   }
@@ -18775,23 +18757,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   setup: function setup(props, context) {
     var execEmit = function execEmit() {
       context.emit('emitLike', !props.isLike);
-    }; // const like = async () => {
-    //     try {
-    //         await axios.post('/api/like/' + props.tweetId)
-    //         execEmit()
-    //     } catch (error) {
-    //         alert("エラーが発生しました。")
-    //     }
-    // }
-    // const unlike = async() => {
-    //     try {
-    //         await axios.post('/api/unlike/' + props.tweetId)
-    //         execEmit()
-    //     } catch (error) {
-    //         alert("エラーが発生しました。")
-    //     }
-    // }
-
+    };
 
     var likeAction = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18827,8 +18793,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     return {
-      // like,
-      // unlike,
       likeAction: likeAction
     };
   }
@@ -19367,21 +19331,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [!$props.isFollowing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    key: 0,
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
-    "class": "btn btn-outline-info rounded-pill",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn rounded-pill", [$props.isFollowing ? 'following' : 'follow']]),
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.followAction && $setup.followAction.apply($setup, arguments);
     })
-  }, "フォロー")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    key: 1,
-    type: "button",
-    "class": "btn btn-info text-white rounded-pill",
-    onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.followAction && $setup.followAction.apply($setup, arguments);
-    })
-  }, "フォロー中"))]);
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.isFollowing ? "フォロー中" : "フォロー"), 3
+  /* TEXT, CLASS */
+  )]);
 }
 
 /***/ }),
@@ -25443,7 +25401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".router-link {\n    text-decoration: none;\n    color: black\n}\n\n.tweet-btn{\n    position: fixed;\n    right: 35px;\n    bottom: 35px;\n    font-size: 5.0em;\n    color: rgb(0, 225, 255);\n    cursor: pointer;\n    background-color: white;\n    border-radius: 50%;\n}\n\n.tweet-btn:active {\n    -webkit-animation: small 0.1s;\n            animation: small 0.1s;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n\n@-webkit-keyframes small \n{\n    100% {transform: scale(0.9);}\n}\n\n@keyframes small \n{\n    100% {transform: scale(0.9);}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".router-link {\n    text-decoration: none;\n    color: black\n}\n\n.follow {\n    background-color: white;\n    color: rgb(0, 225, 255);\n    border-color: rgb(0, 225, 255);\n}\n\n.following {\n    color: white;\n    background-color: rgb(0, 217, 255);;\n    /* border: 2px solid transparent; */\n}\n\n.follow:hover {\n    color: white;\n    background-color: rgb(140, 245, 248);;\n}\n\n.following:hover {\n    color: white;\n    background-color: rgb(113, 234, 255);;\n    /* border: 2px solid transparent; */\n}\n\n.tweet-btn {\n    position: fixed;\n    right: 35px;\n    bottom: 35px;\n    font-size: 5.0em;\n    color: rgb(0, 225, 255);\n    cursor: pointer;\n    background-color: white;\n    border-radius: 50%;\n}\n\n.tweet-btn:active {\n    -webkit-animation: small 0.1s;\n            animation: small 0.1s;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n\n@-webkit-keyframes small \n{\n    100% {transform: scale(0.9);}\n}\n\n@keyframes small \n{\n    100% {transform: scale(0.9);}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
