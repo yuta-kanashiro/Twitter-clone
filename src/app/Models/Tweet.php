@@ -45,9 +45,9 @@ class Tweet extends Model
      * あるツイートとそのユーザーの取得
      * 
      * @param int $tweetId
-     * @return object
+     * @return Tweet
      */
-    public function getTweet(int $tweetId): object
+    public function getTweet(int $tweetId): Tweet
     {
         return $this->with('user')->find($tweetId);
     }
@@ -83,9 +83,9 @@ class Tweet extends Model
      * ツイートの投稿
      * 
      * @param Request $request
-     * @return object
+     * @return Tweet
      */
-    public function createTweet(Request $request): object
+    public function createTweet(Request $request): Tweet
     {
         $this->user_id = auth()->id();
         $this->text = $request->text;

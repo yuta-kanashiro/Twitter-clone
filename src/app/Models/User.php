@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Seeders\UsersTableSeeder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -101,9 +102,9 @@ class User extends Authenticatable
     * あるユーザー情報の取得（ユーザー詳細画面）
     *
     * @param int $id
-    * @return object
+    * @return User
     */
-    public function getUserInfo(int $id): object
+    public function getUserInfo(int $id): User
     {
         return $this->with('tweets')->find($id);
     }

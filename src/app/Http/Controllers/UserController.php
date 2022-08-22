@@ -48,9 +48,9 @@ class UserController extends Controller
     /**
      * あるユーザーの情報の取得
      *
-     * @return object
+     * @return User
      */
-    public function getLoginUser(): object
+    public function getLoginUser(): User
     {
         return auth()->user();
     }

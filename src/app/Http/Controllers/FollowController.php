@@ -16,9 +16,9 @@ class FollowController extends Controller
     {
         $loginUser = User::find(auth()->id());
 
-        $followingExists = $loginUser->isFollowing($followUserId);
+        $isFollowing = $loginUser->isFollowing($followUserId);
         $isMyself = $loginUser->id === $followUserId;
-        $response = $followingExists && !$isMyself;
+        $response = $isFollowing && !$isMyself;
 
         return $response;
     }
@@ -32,9 +32,9 @@ class FollowController extends Controller
     {
         $loginUser = User::find(auth()->id());
 
-        if(!$this->isFollowing($followUserId)){
+        if (!$this->isFollowing($followUserId)) {
             $loginUser->follow($followUserId);
-        }else{
+        } else {
             $loginUser->unfollow($followUserId);
         }
     }

@@ -47,9 +47,9 @@ class TweetController extends Controller
      * あるツイートを取得
      *
      * @param TweetRequest $request
-     * @return object
+     * @return Tweet
      */
-    public function store(TweetRequest $request): object
+    public function store(TweetRequest $request): Tweet
     {
         return $this->tweet->createTweet($request);
     }
