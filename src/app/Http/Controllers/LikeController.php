@@ -21,34 +21,6 @@ class LikeController extends Controller
         return $likeExists;
     }
 
-    // /**
-    // * いいねする
-    // * 
-    // * @param int $likeTweetId
-    // */
-    // public function like(int $likeTweetId)
-    // {
-    //     $loginUser = User::find(auth()->id());
-
-    //     if(!$this->isLike($likeTweetId)){
-    //         $loginUser->like($likeTweetId);
-    //     }
-    // }
-
-    // /**
-    // * いいねを外す
-    // * 
-    // * @param int $likeTweetId
-    // */
-    // public function unlike(int $likeTweetId)
-    // {
-    //     $loginUser = User::find(auth()->id());
-
-    //     if($this->isLike($likeTweetId)){
-    //         $loginUser->unlike($likeTweetId);
-    //     }
-    // }
-
     /**
     * いいねをする/外す
     * 

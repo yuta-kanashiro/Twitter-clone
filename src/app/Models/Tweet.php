@@ -69,7 +69,6 @@ class Tweet extends Model
 
         if($tweets->isEmpty()){
             return [
-                'tweets' => $tweets,
                 'tweetExists' => false
             ];
         }else{

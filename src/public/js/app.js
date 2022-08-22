@@ -18974,32 +18974,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return function getLoginUser() {
         return _ref.apply(this, arguments);
       };
-    }(); // // モーダルウィンドウを表示する
-    // const openModal = () => {
-    //     showContent.value = true;
-    //     getLoginUser()
-    // };
-    // // モーダルウィンドウを閉じる
-    // const closeModal = () => {
-    //     showContent.value = false;
-    // }; 
+    }(); // モーダルウィンドウを表示する
 
 
-    var modalAction = function modalAction() {
-      showContent.value = !showContent.value;
+    var openModal = function openModal() {
+      showContent.value = true;
+      getLoginUser();
+    }; // モーダルウィンドウを閉じる
+
+
+    var closeModal = function closeModal() {
+      showContent.value = false;
     }; // // ツイートを投稿
-    // const createTweet = async (e) => {
-    //     btn.disabled = true;
-    //     const tweetData = new FormData();
-    //     const tweetText = e.target.text.value;
-    //     tweetData.append("text", tweetText);
-    //     try {
-    //         await axios.post('/api/createTweet', tweetData)
-    //     } catch (error) {
-    //         console.log(error)
-    //         alert("エラーが発生しました。")
-    //     }
-    // }
 
 
     var createTweet = /*#__PURE__*/function () {
@@ -19009,7 +18995,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                btn.disabled = true;
+                tweetBtn.disabled = true;
                 tweetData = new FormData(form);
                 _context2.prev = 2;
                 _context2.next = 5;
@@ -19041,9 +19027,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       loginUser: loginUser,
       showContent: showContent,
-      // openModal,
-      // closeModal,
-      modalAction: modalAction,
+      openModal: openModal,
+      closeModal: closeModal,
       createTweet: createTweet
     };
   }
@@ -19636,7 +19621,7 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
   type: "text",
   name: "text",
-  id: "text",
+  id: "tweetText",
   "class": "form-control",
   placeholder: "ツイートしてみよう",
   maxlength: "140",
@@ -19652,7 +19637,7 @@ var _hoisted_10 = {
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
-  id: "btn",
+  id: "tweetBtn",
   "class": "btn btn-info text-white rounded-pill me-2"
 }, "ツイートする", -1
 /* HOISTED */
@@ -19662,7 +19647,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "fas fa-plus-circle tweet-btn",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $setup.modalAction && $setup.modalAction.apply($setup, arguments);
+      return $setup.openModal && $setup.openModal.apply($setup, arguments);
     })
   }), $setup.showContent ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     id: "form",
@@ -19673,7 +19658,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "button",
     "class": "btn btn-dark rounded-pill",
     onClick: _cache[1] || (_cache[1] = function () {
-      return $setup.modalAction && $setup.modalAction.apply($setup, arguments);
+      return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
     })
   }, "閉じる")])], 32
   /* HYDRATE_EVENTS */
