@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tweet/{id}', [TweetController::class, 'show']);
     // ツイート投稿
     Route::post('/createTweet', [TweetController::class, 'store']);
+    // ツイート削除
+    Route::post('/deleteTweet/{id}', [TweetController::class, 'destroy']);
 
     # フォロー関連のルーティング
     // フォロー判定

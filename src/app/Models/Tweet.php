@@ -35,11 +35,17 @@ class Tweet extends Model
      * あるツイートとそのユーザーの取得
      * 
      * @param int $tweetId
-     * @return Tweet
+     * @return array
      */
-    public function getTweet(int $tweetId): Tweet
+    public function getTweet(int $tweetId): array
     {
-        return $this->with('user')->find($tweetId);
+        $tweet = $this->with('user')->find($tweetId);
+
+        return [
+            'tweet' => $tweet,
+            'loginUserId' => auth()->id(),
+            'countLikes' => $tweet->countLikes()
+        ];
     }
 
     /**
@@ -82,6 +88,17 @@ class Tweet extends Model
         $this->save();
 
         return $this;
+    }
+
+    /**
+     * ツイートの削除
+     * 
+     * @param int $tweetId
+    //  * @return 
+     */
+    public function deleteTweet(int $tweetId)
+    {
+        return $this->where('id', $tweetId)->first()->delete();
     }
 
     /**

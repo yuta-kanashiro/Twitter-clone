@@ -105,7 +105,7 @@ export default {
             const ProfileData = await axios.get('/api/userProfile/' + userId.value)
             user.value = ProfileData.data.user
             tweets.value = ProfileData.data.user.tweets
-            loginUserId.value = ProfileData.data.loginUserId === response.data.user.id ? true : false
+            loginUserId.value = ProfileData.data.loginUserId === ProfileData.data.user.id ? true : false
             countFollowings.value = ProfileData.data.countFollowings
             countFollowers.value = ProfileData.data.countFollowers
             countTweets.value = ProfileData.data.countTweets
