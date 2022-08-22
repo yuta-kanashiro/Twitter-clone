@@ -10,7 +10,7 @@
                                 <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="100" height="100">
                             </div>
                             <div v-else>
-                                <!-- プロフィール画像編集機能追加後、ここに記述を追加 -->
+                                <img class="rounded-circle border" :src="user.profile_image" alt="プロフィール画像" width="100" height="100">
                             </div>
                         </div>
                         <div>
@@ -38,7 +38,7 @@
                         </router-link>
                     </div>
                 </div>
-                
+
                 <!-- ツイート一覧 -->
                 <div class="card">
                     <div class="card-body d-flex text-black border-bottom" v-for="tweet in tweets" v-bind:key="tweet.id">
@@ -48,7 +48,7 @@
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
-                                    <!-- プロフィール画像編集機能追加後、ここに記述を追加 -->
+                                    <img class="rounded-circle border" :src="user.profile_image" alt="プロフィール画像" width="60" height="60">
                                 </div>
                             </div>
                             <div>

@@ -10,7 +10,7 @@
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
-                                    <!-- プロフィール画像編集機能追加後、ここに記述を追加 -->
+                                    <img class="rounded-circle border" :src="user.profile_image" alt="プロフィール画像" width="60" height="60">
                                 </div>
                             </div>
                             <div>

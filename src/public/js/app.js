@@ -18675,8 +18675,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   setup: function setup(props) {
     var user = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
     var id = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(props.id);
-    var isFollowing = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
-    console.log(props.id); // フォローチェック（既にフォローしているユーザーかチェック）
+    var isFollowing = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(); // フォローチェック（既にフォローしているユーザーかチェック）
 
     var followCheck = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -18798,6 +18797,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loginUser: Object
   },
   setup: function setup(props) {
+    var url = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(props.loginUser.profile_image);
+    var preview = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)();
     var showContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false); // モーダルウィンドウを表示する
 
     var openModal = function openModal() {
@@ -18807,54 +18808,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var closeModal = function closeModal() {
       showContent.value = false;
+    }; // プロフィール画像のプレビュー
+
+
+    var previewImage = function previewImage() {
+      var inputImage = document.getElementById('profile_image');
+      preview.value = inputImage.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onload = function (e) {
+        url.value = e.target.result;
+      };
+
+      fileReader.readAsDataURL(preview.value);
     }; // ユーザー情報を更新
 
 
     var updateUser = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var loginUser, userData, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                editBtn.disabled = true;
                 loginUser = props.loginUser;
-                userData = new FormData();
-                userData.append("account_name", e.target.account_name.value);
-                userData.append("user_name", e.target.user_name.value);
-                userData.append("profile_text", e.target.profile_text.value);
-                _context.prev = 5;
-                _context.next = 8;
+                userData = new FormData(editForm);
+                _context.prev = 3;
+                _context.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/userProfile/update', userData);
 
-              case 8:
+              case 6:
                 response = _context.sent;
                 loginUser.value = response.data;
                 closeModal();
-                _context.next = 16;
+                _context.next = 14;
                 break;
 
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](5);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](3);
                 alert("エラーが発生しました。");
 
-              case 16:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[5, 13]]);
+        }, _callee, null, [[3, 11]]);
       }));
 
-      return function updateUser(_x) {
+      return function updateUser() {
         return _ref.apply(this, arguments);
       };
     }();
 
     return {
+      url: url,
+      preview: preview,
       showContent: showContent,
       openModal: openModal,
       closeModal: closeModal,
+      previewImage: previewImage,
       updateUser: updateUser
     };
   }
@@ -19105,6 +19120,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _img_default_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/default.png */ "./resources/js/img/default.png");
+
 
 var _hoisted_1 = {
   id: "overlay"
@@ -19114,62 +19131,81 @@ var _hoisted_2 = {
   "class": "container"
 };
 var _hoisted_3 = {
-  "class": "row justify-content-center"
+  "class": "justify-content-center"
 };
 var _hoisted_4 = {
   "class": ""
 };
 var _hoisted_5 = {
-  "class": "form-group row"
+  "class": "form-group text-center"
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "account_name",
-  "class": "col-lg-4 mt-2"
-}, "アカウント名:", -1
-/* HOISTED */
-);
-
+var _hoisted_6 = {
+  "for": "profile_image",
+  "class": "mt-2"
+};
 var _hoisted_7 = {
-  "class": "col-lg-6"
-};
-var _hoisted_8 = ["value"];
-var _hoisted_9 = {
-  "class": "form-group row"
+  key: 0
 };
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "user_name",
-  "class": "col-lg-4 mt-2"
-}, "ユーザーネーム:", -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  id: "icon",
+  "class": "rounded-circle border",
+  src: _img_default_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "プロフィール画像",
+  width: "130",
+  height: "130"
+}, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
-  "class": "col-lg-6"
+var _hoisted_9 = [_hoisted_8];
+var _hoisted_10 = {
+  key: 1
 };
-var _hoisted_12 = ["value"];
-var _hoisted_13 = {
-  "class": "form-group row"
+var _hoisted_11 = ["src"];
+var _hoisted_12 = {
+  "class": "form-group"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "profile_text",
-  "class": "col-lg-4 mt-2"
-}, "プロフィール文:", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "account_name",
+  "class": "mt-2"
+}, "アカウント名", -1
 /* HOISTED */
 );
 
+var _hoisted_14 = ["value"];
 var _hoisted_15 = {
-  "class": "col-lg-6"
+  "class": "form-group"
 };
-var _hoisted_16 = ["value"];
-var _hoisted_17 = {
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "user_name",
+  "class": "mt-2"
+}, "ユーザーネーム", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = ["value"];
+var _hoisted_18 = {
+  "class": "form-group"
+};
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "profile_text",
+  "class": "mt-2"
+}, "プロフィール文", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = ["value"];
+var _hoisted_21 = {
   "class": "d-flex justify-content-center mt-3"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
+  id: "editBtn",
   "class": "btn btn-outline-dark rounded-pill me-2"
 }, "更新する", -1
 /* HOISTED */
@@ -19183,11 +19219,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.openModal && $setup.openModal.apply($setup, arguments);
     })
   }, "編集"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    id: "editForm",
     enctype: "multipart/form-data",
-    onSubmit: _cache[2] || (_cache[2] = function () {
+    onSubmit: _cache[3] || (_cache[3] = function () {
       return $setup.updateUser && $setup.updateUser.apply($setup, arguments);
     })
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_6, [!$props.loginUser.profile_image ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    id: "icon",
+    "class": "rounded-circle border",
+    src: $setup.url,
+    width: "130",
+    height: "130"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_11)])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "file",
+    "class": "icon-update form-control",
+    id: "profile_image",
+    name: "profile_image",
+    accept: "image/*",
+    style: {
+      "display": "none"
+    },
+    onChange: _cache[1] || (_cache[1] = function () {
+      return $setup.previewImage && $setup.previewImage.apply($setup, arguments);
+    })
+  }, null, 32
+  /* HYDRATE_EVENTS */
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     id: "account_name",
@@ -19197,7 +19256,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     maxlength: "20"
   }, null, 8
   /* PROPS */
-  , _hoisted_8)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_14)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     id: "user_name",
@@ -19207,7 +19266,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     maxlength: "10"
   }, null, 8
   /* PROPS */
-  , _hoisted_12)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+  , _hoisted_17)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
     type: "text",
     "class": "form-control",
     id: "profile_text",
@@ -19216,10 +19275,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     maxlength: "120"
   }, null, 8
   /* PROPS */
-  , _hoisted_16)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , _hoisted_20)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn btn-dark rounded-pill",
-    onClick: _cache[1] || (_cache[1] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $setup.closeModal && $setup.closeModal.apply($setup, arguments);
     })
   }, "閉じる")])], 32
@@ -19279,13 +19338,14 @@ var _hoisted_8 = [_hoisted_7];
 var _hoisted_9 = {
   key: 1
 };
-var _hoisted_10 = {
+var _hoisted_10 = ["src"];
+var _hoisted_11 = {
   "class": "d-block"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   "class": "d-blocck text-muted"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "d-block"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -19300,11 +19360,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "router-link"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, _hoisted_8)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.account_name), 1
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, _hoisted_8)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          "class": "rounded-circle border",
+          src: user.profile_image,
+          alt: "プロフィール画像",
+          width: "60",
+          height: "60"
+        }, null, 8
+        /* PROPS */
+        , _hoisted_10)]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.account_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.user_name), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.user_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.profile_text), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.profile_text), 1
         /* TEXT */
         )])])];
       }),
@@ -19375,29 +19443,30 @@ var _hoisted_9 = [_hoisted_8];
 var _hoisted_10 = {
   key: 1
 };
-var _hoisted_11 = {
+var _hoisted_11 = ["src"];
+var _hoisted_12 = {
   "class": "d-flex"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "mb-0 fw-bold"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "d-block text-muted mb-2"
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "ms-auto"
 };
-var _hoisted_15 = {
+var _hoisted_16 = {
   key: 0
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   key: 1
 };
-var _hoisted_17 = {
+var _hoisted_18 = {
   "class": "d-block"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "d-flex mt-2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("1"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "text-muted me-1"
@@ -19407,17 +19476,17 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_20 = {
   "class": "card"
 };
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "me-2"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   key: 0
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "rounded-circle border",
   src: _img_default_png__WEBPACK_IMPORTED_MODULE_1__["default"],
   alt: "プロフィール画像",
@@ -19427,17 +19496,18 @@ var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_23 = [_hoisted_22];
-var _hoisted_24 = {
+var _hoisted_24 = [_hoisted_23];
+var _hoisted_25 = {
   key: 1
 };
-var _hoisted_25 = {
+var _hoisted_26 = ["src"];
+var _hoisted_27 = {
   "class": "text-muted ms-1"
 };
-var _hoisted_26 = {
+var _hoisted_28 = {
   "class": "text-muted float-end"
 };
-var _hoisted_27 = {
+var _hoisted_29 = {
   "class": "d-block"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -19447,33 +19517,41 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ユーザープロフィール "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$setup.user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ユーザープロフィール "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$setup.user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, _hoisted_9)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    "class": "rounded-circle border",
+    src: $setup.user.profile_image,
+    alt: "プロフィール画像",
+    width: "100",
+    height: "100"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_11)]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserEdit, {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_UserEdit, {
     loginUser: $setup.user
   }, null, 8
   /* PROPS */
-  , ["loginUser"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FollowButton, {
+  , ["loginUser"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !$setup.loginUserId ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FollowButton, {
     id: $setup.user.id
   }, null, 8
   /* PROPS */
-  , ["id"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.profile_text), 1
+  , ["id"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.profile_text), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: '/user-profile/' + $setup.user.id + '/follow-list',
     "class": "router-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_18];
+      return [_hoisted_19];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
+  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ツイート一覧 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tweets, function (tweet) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "card-body d-flex text-black border-bottom",
       key: tweet.id
@@ -19482,13 +19560,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "router-link d-flex"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [$setup.user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, _hoisted_23)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" プロフィール画像編集機能追加後、ここに記述を追加 ")]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [$setup.user.profile_image === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, _hoisted_24)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+          "class": "rounded-circle border",
+          src: $setup.user.profile_image,
+          alt: "プロフィール画像",
+          width: "60",
+          height: "60"
+        }, null, 8
+        /* PROPS */
+        , _hoisted_26)]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.account_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_25, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, "@" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.user.user_name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.format(tweet.created_at)), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.format(tweet.created_at)), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tweet.text), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tweet.text), 1
         /* TEXT */
         )])];
       }),
@@ -24872,7 +24958,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay{\n    /*　要素を重ねた時の順番　*/\n    z-index:1;\n\n    /*　画面全体を覆う設定　*/\n    position:fixed;\n    top:0;\n    left:0;\n    width:100%;\n    height:100%;\n    background-color:rgba(0,0,0,0.5);\n\n    /*　画面の中央に要素を表示させる設定　*/\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n#content{\n    z-index:2;\n    width:50%;\n    padding: 1em;\n    background:#fff;\n    border-radius: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay{\n    z-index: 1;\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.5);\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n#content{\n    z-index: 2;\n    padding: 1em;\n    margin: 1em;\n    max-width: 500px;\n    background: #fff;\n    border-radius: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

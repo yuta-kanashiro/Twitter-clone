@@ -22,7 +22,6 @@ export default {
         const user = ref([]);
         const id = ref(props.id)
         const isFollowing = ref();
-        console.log(props.id)
 
         // フォローチェック（既にフォローしているユーザーかチェック）
         const followCheck = async() => {
