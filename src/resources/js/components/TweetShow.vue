@@ -20,7 +20,7 @@
                                 </div>
                             </router-link>
                             <div class="ms-auto">
-                                <TweetDeleteButton :isLoginUser="isLoginUser" />
+                                <TweetDeleteButton :tweetId="tweetId" :isLoginUser="isLoginUser" />
                             </div>
                         </div>
                         <div>

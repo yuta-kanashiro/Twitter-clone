@@ -20,8 +20,8 @@ class TweetPolicy
         //
     }
 
-    public function destroy(User $user, int $tweetId)
+    public function destroy(User $user, Tweet $tweet)
     {
-        return $user->id === $tweetId;
+        return $user->id === $tweet->user_id;
     }
 }

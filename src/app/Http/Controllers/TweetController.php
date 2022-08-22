@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 
 class TweetController extends Controller
 {
@@ -58,10 +57,10 @@ class TweetController extends Controller
      */
     public function destroy(int $tweetId)
     {
-        Log::debug($tweetId);
-        $this->authorize('destroy', $tweetId);
-        $this->tweet->deleteTweet($tweetId);
+        $tweet = $this->tweet->where('id', $tweetId)->first();
+        $this->authorize('destroy', $tweet);
 
-        return redirect('/timeLine');
+        return $this->tweet->deleteTweet($tweetId);
+
     }
 }

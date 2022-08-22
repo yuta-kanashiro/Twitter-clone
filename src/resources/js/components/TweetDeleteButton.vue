@@ -1,27 +1,36 @@
 <template>
-    <button v-if="isLoginUser" type="button" class="btn btn-outline-danger rounded-pill">削除</button>
+    <button v-if="isLoginUser" type="button" id="deleteBtn" class="btn btn-outline-danger rounded-pill" @click="deleteTweet">削除</button>
 </template>
 
 <script>
 import axios from 'axios';
-import { ref } from 'vue'
+import { useRouter } from 'vue-router';
 
 export default {
     props: {
+        tweetId: Number,
         isLoginUser: Boolean
     },
-    setup(){
-        const users = ref([]);
+    setup(props) {
+        const router = useRouter();
 
-        // ユーザー一覧取得
-        const getUserList = async() => {
-            const response = await axios.get('/api/usersList')
-            users.value = response.data
+        const deleteTweet = async () => {
+            deleteBtn.disabled = true;
+
+            if(confirm('ツイートを削除しますか？')){
+                try {
+                    await axios.post('/api/deleteTweet/' + props.tweetId)
+                    router.push({ path: '/home' });
+                } catch (error) {
+                    console.log(error)
+                    alert("エラーが発生しました。")
+                    deleteBtn.disabled = false;
+                }
+            }
         }
 
-
-        return{
-            users,
+        return {
+            deleteTweet
         }
     }
 }
