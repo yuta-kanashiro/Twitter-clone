@@ -2,3 +2,47 @@
     text-decoration: none;
     color: black
 }
+
+.follow {
+    background-color: white;
+    color: rgb(0, 225, 255);
+    border-color: rgb(0, 225, 255);
+}
+
+.following {
+    color: white;
+    background-color: rgb(0, 217, 255);;
+    /* border: 2px solid transparent; */
+}
+
+.follow:hover {
+    color: white;
+    background-color: rgb(140, 245, 248);;
+}
+
+.following:hover {
+    color: white;
+    background-color: rgb(113, 234, 255);;
+    /* border: 2px solid transparent; */
+}
+
+.tweet-btn {
+    position: fixed;
+    right: 35px;
+    bottom: 35px;
+    font-size: 5.0em;
+    color: rgb(0, 225, 255);
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.tweet-btn:active {
+    animation: small 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes small 
+{
+    100% {transform: scale(0.9);}
+}

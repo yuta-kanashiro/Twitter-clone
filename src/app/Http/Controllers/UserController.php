@@ -39,8 +39,19 @@ class UserController extends Controller
         return [
             'user' => $user,
             'loginUserId' => Auth::id(),
-            'countFollowing' => $user->countFollowings(),
-            'countFollower' => $user->countFollowers()
+            'countFollowings' => $user->countFollowings(),
+            'countFollowers' => $user->countFollowers(),
+            'countTweets' => $user->countTweets()
         ];
+    }
+
+    /**
+     * あるユーザーの情報の取得
+     *
+     * @return User
+     */
+    public function getLoginUser(): User
+    {
+        return auth()->user();
     }
 }

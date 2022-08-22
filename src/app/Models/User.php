@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable
 {
@@ -48,40 +46,27 @@ class User extends Authenticatable
     ];
 
     # リレーション
-    /**
-     * ユーザーが投稿したツイートの取得
-     */
-    public function tweets()
+    public function tweets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Tweet::class);
     }
 
-    /**
-     * ユーザーが投稿したコメントの取得
-     */
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * あるユーザーがフォローしているユーザーのIDを取得
-     */
-    public function followings()
+    public function followings(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follow', 'following_id', 'follower_id')->withTimestamps();
     }
 
-    /**
-     * あるユーザーをフォローしているユーザーのIDを取得
-     */
-    public function followers()
+    public function followers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follow', 'follower_id', 'following_id')->withTimestamps();
     }
 
-    // あるユーザーがいいねしている掲示板のIDを取得
-    public function likes()
+    public function likes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tweet::class, 'likes', 'user_id', 'tweet_id')->withTimestamps();
     }
@@ -101,9 +86,9 @@ class User extends Authenticatable
     * あるユーザー情報の取得（ユーザー詳細画面）
     *
     * @param int $id
-    * @return object
+    * @return User
     */
-    public function getUserInfo(int $id): object
+    public function getUserInfo(int $id): User
     {
         return $this->with('tweets')->find($id);
     }
@@ -170,7 +155,7 @@ class User extends Authenticatable
      */
     public function isLike($likeTweetId): bool
     {
-        //  いいね対象の掲示板ID（$likeBulletinId）が、すでにいいねしているbulletin_idと重複していないかどうかを判定
+        //  いいね対象の掲示板ID（$likeTweetId）が、すでにいいねしているtweet_idと重複していないかどうかを判定
         return $this->likes()->where('tweet_id', $likeTweetId)->exists();
     }
 
@@ -193,5 +178,15 @@ class User extends Authenticatable
     public function unlike($likeTweetId)
     {
         $this->likes()->detach($likeTweetId);
+    }
+
+    /**
+     * ツイートー数カウント
+     * 
+     * @return int
+     */
+    public function countTweets(): int
+    {
+        return $this->tweets()->count();
     }
 }

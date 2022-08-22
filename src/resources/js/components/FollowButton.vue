@@ -1,7 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-outline-info rounded-pill" v-if="!isFollowing" @click="follow">フォロー</button>
-        <button type="button" class="btn btn-info text-white rounded-pill" v-else @click="unfollow">フォロー中</button>
+        <button type="button" class="btn rounded-pill" :class="[ isFollowing ? 'following' : 'follow' ]" @click="followAction">{{ isFollowing ? "フォロー中" : "フォロー" }}</button>
     </div>
 </template>
 
@@ -22,20 +21,9 @@ export default {
             context.emit('emitFollow', !props.isFollowing);
         }
 
-        // フォローする
-        const follow = async() => {
+        const followAction = async() => {
             try {
-                await axios.post('/api/follow/' + props.userId)
-                execEmit()
-            } catch (error) {
-                alert("エラーが発生しました。")
-            }
-        }
-
-        // フォローを外す
-        const unfollow = async() => {
-            try {
-                await axios.post('/api/unfollow/' + props.userId)
+                await axios.post('/api/followAction/' + props.userId)
                 execEmit()
             } catch (error) {
                 alert("エラーが発生しました。")
@@ -44,9 +32,7 @@ export default {
 
         return{
             user,
-            follow,
-            unfollow,
-            execEmit
+            followAction
         }
     }
 }

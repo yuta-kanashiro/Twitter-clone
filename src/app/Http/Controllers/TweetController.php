@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
-use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class TweetController extends Controller
 {
@@ -30,5 +31,26 @@ class TweetController extends Controller
             'tweet' => $tweet,
             'countLikes' => $tweet->countLikes()
         ];
+    }
+
+    /**
+    * 全ユーザー情報の取得
+    * 
+    * @return array
+    */
+    public function getTimeline(): array
+    {
+        return $this->tweet->getTimeline();
+    }
+
+    /**
+     * あるツイートを取得
+     *
+     * @param TweetRequest $request
+     * @return Tweet
+     */
+    public function store(TweetRequest $request): Tweet
+    {
+        return $this->tweet->createTweet($request);
     }
 }

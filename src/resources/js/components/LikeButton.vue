@@ -1,7 +1,6 @@
 <template>
     <div class="d-flex justify-content-center">
-        <i type="button" v-if="!isLike" class="far fa-heart heart" @click="like"></i>
-        <i type="button" v-if="isLike" class="fa fa-heart text-danger heart" @click="unlike"></i>
+        <i type="button" class="heart" :class="[ isLike ? 'fa fa-heart text-danger' : 'far fa-heart']" @click="likeAction"></i>
     </div>
 </template>
 
@@ -15,23 +14,13 @@ export default {
         isLike: Boolean
     },
     setup(props, context) {
-
         const execEmit = () => {
             context.emit('emitLike', !props.isLike);
         }
 
-        const like = async () => {
+        const likeAction = async() => {
             try {
-                await axios.post('/api/like/' + props.tweetId)
-                execEmit()
-            } catch (error) {
-                alert("エラーが発生しました。")
-            }
-        }
-
-        const unlike = async() => {
-            try {
-                await axios.post('/api/unlike/' + props.tweetId)
+                await axios.post('/api/likeAction/' + props.tweetId)
                 execEmit()
             } catch (error) {
                 alert("エラーが発生しました。")
@@ -39,14 +28,13 @@ export default {
         }
 
         return {
-            like,
-            unlike
+            likeAction
         }
     }
 }
 </script>
 <style>
-i {
+.heart {
     font-size:1.5em;
 }
 

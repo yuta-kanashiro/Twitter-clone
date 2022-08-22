@@ -28,24 +28,26 @@ Route::middleware('auth')->group(function () {
     Route::get('/usersList', [UserController::class, 'index']);
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
+    // ログインユーザー取得
+    Route::get('/loginUser', [UserController::class, 'getLoginUser']);
+
+    # ツイート関連のルーティング
+    // タイムラインの取得
+    Route::get('/timeLine', [TweetController::class, 'getTimeline']);
+    // ツイート詳細取得
+    Route::get('/tweet/{id}', [TweetController::class, 'show']);
+    // ツイート投稿
+    Route::post('/createTweet', [TweetController::class, 'store']);
 
     # フォロー関連のルーティング
     // フォロー判定
     Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
-    // フォローする
-    Route::post('/follow/{id}', [FollowController::class, 'follow']);
-    // フォローを外す
-    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow']);
+    // フォローする/外す
+    Route::post('/followAction/{id}', [FollowController::class, 'followAction']);
 
     # いいね関連のルーティング
     // いいね判定
     Route::get('/isLike/{id}', [LikeController::class, 'isLike']);
-    // いいねする
-    Route::post('/like/{id}', [LikeController::class, 'like']);
-    // いいねを外す
-    Route::post('/unlike/{id}', [LikeController::class, 'unlike']);
-
-    # ツイート関連のルーティング
-    // ツイート詳細取得
-    Route::get('/tweet/{id}', [TweetController::class, 'show']);
+    // いいねする/外す
+    Route::post('/likeAction/{id}', [LikeController::class, 'likeAction']);
 });
