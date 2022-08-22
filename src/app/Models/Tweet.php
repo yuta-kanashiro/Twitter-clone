@@ -29,4 +29,30 @@ class Tweet extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * あるツイートとそのユーザーの取得
+     *  */
+    public function getTweet($id)
+    {
+        return $this->with('user')->find($id);
+    }
+
+    /**
+     * ある掲示板をいいねしているユーザーのIDを取得
+     */
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
+    }
+
+    /**
+     * いいね数カウント
+     * 
+     * @return int
+     */
+    public function countLikes(): int
+    {
+        return $this->likes()->count();
+    }
 }

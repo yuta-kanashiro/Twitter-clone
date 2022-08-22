@@ -7,23 +7,20 @@ use App\Models\User;
 class FollowController extends Controller
 {
     /**
-    * フォロー済みかチェック（フォローしていれば1,フォローしていなければ0を返す）
+    * フォロー済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
     * @param  int $followUserId
-    * @return int
+    * @return bool
     */
-    public function isFollowing(int $followUserId): int
+    public function isFollowing(int $followUserId): bool
     {
         $loginUser = User::find(auth()->id());
 
         $followingExists = $loginUser->isFollowing($followUserId);
         $isMyself = $loginUser->id === $followUserId;
+        $response = $followingExists && !$isMyself;
 
-        if ($followingExists && !$isMyself){
-            return 1;
-        }elseif(!$followingExists && !$isMyself){
-            return 0;
-        }
+        return $response;
     }
 
     /**

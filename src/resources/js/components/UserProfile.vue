@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="ms-auto">
                                     <button v-if="loginUserId === user.id" type="button" class="btn btn-outline-dark rounded-pill">編集</button>
-                                    <FollowButton v-else :id="user.id" :isFollowing="isFollowing" @emitFollow="isFollow"/>
+                                    <FollowButton v-else :userId="user.id" :isFollowing="isFollowing" @emitFollow="isFollow"/>
                                 </div>
                             </div>
                             <span class="d-block">{{ user.profile_text }}</span>
@@ -80,7 +80,7 @@ export default {
         const tweets = ref([]);
         const loginUserId = ref();
         // Numberでidを文字列から数値に変換
-        const id = ref(Number(props.id));
+        const userId = ref(Number(props.id));
         const countFollowing = ref();
         const countFollower = ref();
         const isFollowing = ref();
@@ -93,15 +93,12 @@ export default {
 
         // あるユーザーの情報を取得
         const getUserData = async () => {
-            const getIsFollowing = axios.get('/api/isFollowing/' + id.value)
-            const getProfileData = axios.get('/api/userProfile/' + id.value)
-
             isLoding.value = true
 
-            const followingExists = await getIsFollowing
-            isFollowing.value = followingExists.data === 1 ? true : false
+            const followingExists = await axios.get('/api/isFollowing/' + userId.value)
+            isFollowing.value = Boolean(followingExists.data)
 
-            const ProfileData = await getProfileData
+            const ProfileData = await axios.get('/api/userProfile/' + userId.value)
             user.value = ProfileData.data.user
             tweets.value = ProfileData.data.user.tweets
             loginUserId.value = ProfileData.data.loginUserId
