@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Database\Seeders\UsersTableSeeder;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable
 {
@@ -49,40 +46,27 @@ class User extends Authenticatable
     ];
 
     # リレーション
-    /**
-     * ユーザーが投稿したツイートの取得
-     */
-    public function tweets()
+    public function tweets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Tweet::class);
     }
 
-    /**
-     * ユーザーが投稿したコメントの取得
-     */
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * あるユーザーがフォローしているユーザーのIDを取得
-     */
-    public function followings()
+    public function followings(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follow', 'following_id', 'follower_id')->withTimestamps();
     }
 
-    /**
-     * あるユーザーをフォローしているユーザーのIDを取得
-     */
-    public function followers()
+    public function followers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follow', 'follower_id', 'following_id')->withTimestamps();
     }
 
-    // あるユーザーがいいねしている掲示板のIDを取得
-    public function likes()
+    public function likes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tweet::class, 'likes', 'user_id', 'tweet_id')->withTimestamps();
     }

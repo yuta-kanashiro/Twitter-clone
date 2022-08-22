@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class Tweet extends Model
 {
@@ -17,26 +16,17 @@ class Tweet extends Model
         'text',
     ];
     
-    /**
-     * ツイートを保持するユーザーを取得
-     */
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * ツイートに対するコメントの取得
-     */
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * ある掲示板をいいねしているユーザーのIDを取得
-     */
-    public function likes()
+    public function likes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'likes', 'tweet_id', 'user_id')->withTimestamps();
     }
