@@ -3,65 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
 {
     /**
-    * フォロー済みかチェック
+    * フォロー済みかチェック（フォローしていればtrue,フォローしていなければfalseを返す）
     *
-    * @param  int $id
+    * @param  int $followUserId
     * @return bool
     */
-    public function followCheck(int $id): bool
+    public function isFollowing(int $followUserId): bool
     {
-        $loginUser = User::find(Auth::id());
-        return $loginUser->followCheck($id);
+        $loginUser = User::find(auth()->id());
+
+        $isFollowing = $loginUser->isFollowing($followUserId);
+        $isMyself = $loginUser->id === $followUserId;
+        $response = $isFollowing && !$isMyself;
+
+        return $response;
     }
 
     /**
-    * フォローする
+    * フォローする/外す
     * 
-    * @param  int $id
+    * @param int $followUserId
     */
-    public function follow(int $id)
+    public function followAction(int $followUserId)
     {
-        // ログイン中のユーザー
-        $loginUser = User::find(Auth::id());
-        // フォロー対象のユーザーID
-        $followUserId = $id;
+        $loginUser = User::find(auth()->id());
 
-        // すでにフォロー済みではないか？
-        $existing = $loginUser->followCheck($followUserId);
-        // フォローする相手がユーザ自身ではないか？
-        $myself = $loginUser->id === $followUserId;
-
-        // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
-        if (!$existing && !$myself){
+        if (!$this->isFollowing($followUserId)) {
             $loginUser->follow($followUserId);
-        }
-    }
-
-    /**
-    * フォローを外す
-    * 
-    * @param  int $id
-    */
-    public function unfollow($id)
-    {
-        // ログイン中のユーザー
-        $loginUser = User::find(Auth::id());
-        // フォロー対象のユーザーID
-        $followUserId = $id;
-
-        // すでにフォロー済みではないか？
-        $existing = $loginUser->followCheck($followUserId);
-        // フォローする相手がユーザ自身ではないか？
-        $myself = $loginUser->id === $followUserId;
-
-        // すでにフォロー済み、かつフォロー相手がユーザ自身ではない場合、フォローを外す
-        if ($existing && !$myself){
+        } else {
             $loginUser->unfollow($followUserId);
         }
     }

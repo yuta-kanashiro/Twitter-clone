@@ -34,19 +34,15 @@ class UsersTableSeeder extends Seeder
         $followingUsers = User::all();
 
         foreach($followingUsers as $followingUser){
-            // 1~20までの数値をランダムで取得
-            $ran = rand(1, 20);
-            // Userモデルからランダムで1~20件取得
-            $followerUsers = User::inRandomOrder()->take($ran)->get();
+            // Userモデルからランダムで1~15件取得
+            $followerUsers = User::inRandomOrder()->take(rand(0, 12))->get();
 
             foreach($followerUsers as $followerUser){
-                // すでにフォロー済みではないか？
-                $existing = $followingUser->followCheck($followerUser->id);
-                // フォローする相手がユーザ自身ではないか？
-                $myself = $followingUser->id === $followerUser->id;
+                $followingExists = $followingUser->isFollowing($followerUser->id);
+                $isMyself = $followingUser->id === $followerUser->id;
 
                 // フォロー済みではない、かつフォロー相手がユーザ自身ではない場合、フォロー
-                if (!$existing && !$myself){
+                if (!$followingExists && !$isMyself){
                     $followingUser->follow($followerUser->id);
                 }
             }
