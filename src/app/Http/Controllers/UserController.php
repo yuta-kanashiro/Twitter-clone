@@ -40,10 +40,12 @@ class UserController extends Controller
 
         return [
             'user' => $user,
+            'tweetLikes' => $user->likes()->with('user')->get(),
             'loginUserId' => Auth::id(),
             'countFollowings' => $user->countFollowings(),
             'countFollowers' => $user->countFollowers(),
-            'countTweets' => $user->countTweets()
+            'countTweets' => $user->countTweets(),
+            'countLikes' => $user->countLikes()
         ];
     }
 

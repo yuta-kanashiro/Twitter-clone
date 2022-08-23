@@ -48,8 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/isFollowing/{id}', [FollowController::class, 'isFollowing']);
     // フォローする/外す
     Route::post('/followAction/{id}', [FollowController::class, 'followAction']);
-    // フォローリスト取得
-    Route::get('/followList/{id}', [FollowController::class, 'getFollowList']);
 
     # いいね関連のルーティング
     // いいね判定
