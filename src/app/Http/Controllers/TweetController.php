@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
-use Illuminate\Support\Collection;
 
 class TweetController extends Controller
 {
@@ -42,25 +41,19 @@ class TweetController extends Controller
      * ツイート投稿
      *
      * @param TweetRequest $request
-     * @return Tweet
      */
-    public function store(TweetRequest $request): Tweet
+    public function store(TweetRequest $request)
     {
-        return $this->tweet->createTweet($request);
+        $this->tweet->createTweet($request);
     }
 
     /**
      * ツイート削除
      *
      * @param int $tweetId
-    //  * @return 
      */
     public function destroy(int $tweetId)
     {
-        $tweet = $this->tweet->where('id', $tweetId)->first();
-        $this->authorize('destroy', $tweet);
-
-        return $this->tweet->deleteTweet($tweetId);
-
+        $this->tweet->deleteTweet($tweetId);
     }
 }

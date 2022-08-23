@@ -127,6 +127,25 @@ class User extends Authenticatable
     }
 
     /**
+    * フォローリスト
+    * 
+    * @param int $userId
+    * @return array
+    */
+    public function getFollowList(int $userId): array
+    {
+        $user = $this->find($userId);
+
+        $followingUsers = $user->whereIn('id', $user->followings()->pluck('follower_id'))->get();
+        $followerUsers = $user->whereIn('id', $user->followers()->pluck('following_id'))->get();
+
+        return [
+            'followingUsers' => $followingUsers,
+            'followerUsers' => $followerUsers
+        ];
+    }
+
+    /**
      * フォロー数カウント
      * 
      * @return int

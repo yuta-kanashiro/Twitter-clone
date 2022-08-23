@@ -17,7 +17,7 @@ export default {
         const deleteTweet = async () => {
             deleteBtn.disabled = true;
 
-            if(confirm('ツイートを削除しますか？')){
+            if (confirm('ツイートを削除しますか？')) {
                 try {
                     await axios.post('/api/deleteTweet/' + props.tweetId)
                     router.push({ path: '/home' });

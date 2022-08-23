@@ -79,26 +79,22 @@ class Tweet extends Model
      * ツイートの投稿
      * 
      * @param Request $request
-     * @return Tweet
      */
-    public function createTweet(Request $request): Tweet
+    public function createTweet(Request $request)
     {
         $this->user_id = auth()->id();
         $this->text = $request->text;
         $this->save();
-
-        return $this;
     }
 
     /**
      * ツイートの削除
      * 
      * @param int $tweetId
-    //  * @return 
      */
     public function deleteTweet(int $tweetId)
     {
-        return $this->where('id', $tweetId)->first()->delete();
+        $this->find($tweetId)->delete();
     }
 
     /**

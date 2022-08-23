@@ -50,11 +50,12 @@ class UserController extends Controller
     /**
     * ユーザー情報の編集
     * 
-    * @return
+    * @param UpdateRequest $request
+    * @param UpdateAction $useCase
     */
     public function update(UpdateRequest $request, UpdateAction $useCase)
     {
-        return $useCase->update($request);
+        $useCase->update($request);
     }
 
     /**

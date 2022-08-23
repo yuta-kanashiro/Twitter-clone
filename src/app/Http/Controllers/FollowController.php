@@ -38,4 +38,17 @@ class FollowController extends Controller
             $loginUser->unfollow($followUserId);
         }
     }
+
+    /**
+    * フォローリスト
+    * 
+    * @param int $userId
+    * @return array
+    */
+    public function getFollowList(int $userId): array
+    {
+        $user = User::find($userId);
+
+        return $user->getFollowList($userId);
+    }
 }
