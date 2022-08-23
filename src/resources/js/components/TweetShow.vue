@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div>
-                            <span class="d-block fs-4 mb-2">{{ tweet.text }}</span>
+                            <span class="d-block fs-4 mb-2" style="white-space: pre-wrap;">{{ tweet.text }}</span>
                             <span class="d-block text-muted">{{ format(tweet.created_at) }}</span>
                         </div>
                         <div class="mt-2">

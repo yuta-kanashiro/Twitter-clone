@@ -21,7 +21,7 @@
                                 <span class="text-muted ms-2">{{ format(tweet.created_at) }}</span>
                             </router-link>
                             <router-link :to="'/tweet/' + tweet.id" class="router-link">
-                                <span class="d-block">{{ tweet.text }}</span>
+                                <span class="d-block" style="white-space: pre-wrap;">{{ tweet.text }}</span>
                             </router-link>
                         </div>
                     </div>

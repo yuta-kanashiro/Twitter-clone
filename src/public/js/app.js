@@ -19920,7 +19920,10 @@ var _hoisted_12 = {
   "class": "text-muted ms-2"
 };
 var _hoisted_13 = {
-  "class": "d-block"
+  "class": "d-block",
+  style: {
+    "white-space": "pre-wrap"
+  }
 };
 var _hoisted_14 = {
   key: 1,
@@ -20219,7 +20222,10 @@ var _hoisted_15 = {
   "class": "ms-auto"
 };
 var _hoisted_16 = {
-  "class": "d-block fs-4 mb-2"
+  "class": "d-block fs-4 mb-2",
+  style: {
+    "white-space": "pre-wrap"
+  }
 };
 var _hoisted_17 = {
   "class": "d-block text-muted"
