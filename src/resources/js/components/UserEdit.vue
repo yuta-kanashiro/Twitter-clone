@@ -105,7 +105,7 @@ export default {
 </script>
 <style>
 #overlay{
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 0;
     left: 0;
@@ -118,7 +118,7 @@ export default {
 }
 
 #content{
-    z-index: 2;
+    z-index: 3;
     padding: 1em;
     margin: 1em;
     max-width: 500px;
