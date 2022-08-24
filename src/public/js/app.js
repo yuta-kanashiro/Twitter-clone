@@ -18760,7 +18760,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var followingUsers = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
     var followerUsers = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]); // フォロー一覧取得
 
-    var getUserList = /*#__PURE__*/function () {
+    var getFollowList = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -18783,7 +18783,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }));
 
-      return function getUserList() {
+      return function getFollowList() {
         return _ref.apply(this, arguments);
       };
     }();
@@ -18792,7 +18792,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       tabItem.value = data;
     };
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(getUserList);
+    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(getFollowList);
     return {
       tabItem: tabItem,
       isSelect: isSelect,
@@ -19529,10 +19529,9 @@ dayjs__WEBPACK_IMPORTED_MODULE_4___default().locale("ja");
                 countFollowers.value = ProfileData.data.countFollowers;
                 countTweets.value = ProfileData.data.countTweets;
                 countLikes.value = ProfileData.data.countLikes;
-                console.log(ProfileData.data.user.likes);
                 isLoading.value = false;
 
-              case 18:
+              case 17:
               case "end":
                 return _context.stop();
             }

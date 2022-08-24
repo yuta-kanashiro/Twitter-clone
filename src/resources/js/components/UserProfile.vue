@@ -152,8 +152,6 @@ export default {
             countTweets.value = ProfileData.data.countTweets
             countLikes.value = ProfileData.data.countLikes
 
-            console.log(ProfileData.data.user.likes)
-
             isLoading.value = false
         }
 

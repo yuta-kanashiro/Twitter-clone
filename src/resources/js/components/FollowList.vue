@@ -75,7 +75,7 @@ export default {
         const followerUsers = ref([])
 
         // フォロー一覧取得
-        const getUserList = async() => {
+        const getFollowList = async() => {
             const response = await axios.get('/api/followList/' + props.id)
             followingUsers.value = response.data.followingUsers
             followerUsers.value = response.data.followerUsers
@@ -85,7 +85,7 @@ export default {
             tabItem.value = data;
         }
 
-        onMounted(getUserList)
+        onMounted(getFollowList)
 
         return {
             tabItem,
