@@ -5,7 +5,7 @@
         <div id="overlay" v-if="showContent">
             <div id="content" class="container">
                 <div class="justify-content-center">
-                    <form id="form" @submit="createTweet">
+                    <form id="tweetForm" action="" method="">
                         <div class="text-center">
                             <div v-if="!loginUser.profile_image">
                                 <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <button type="submit" id="tweetBtn" class="btn btn-info text-white rounded-pill me-2">ツイートする</button>
+                            <button type="button" id="tweetBtn" class="btn btn-info text-white rounded-pill me-2" @click="createTweet">ツイートする</button>
                             <button type="button" class="btn btn-dark rounded-pill" @click="closeModal">閉じる</button>
                         </div>
                     </form>
@@ -56,12 +56,15 @@ export default {
         // // ツイートを投稿
         const createTweet = async () => {
             tweetBtn.disabled = true;
-            const tweetData = new FormData(form);
+            const tweetForm  = document.getElementById('tweetForm')
+            const tweetData = new FormData(tweetForm);
 
             try {
                 await axios.post('/api/createTweet', tweetData)
+                location.href('/home')
             } catch (error) {
                 alert("エラーが発生しました。")
+                tweetBtn.disabled = false;
             }
         }
 
