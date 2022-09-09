@@ -15,14 +15,14 @@
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item dropdown">
+                        <a href="{{ url('/userList') }}" class="dropdown-item text-muted">
+                            ユーザーリスト
+                        </a>
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->account_name }}
                         </a>
                         
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a href="{{ url('/userList') }}" class="dropdown-item">
-                                ユーザーリスト
-                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 ログアウト
                             </a>
