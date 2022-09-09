@@ -28,7 +28,7 @@ class TweetController extends Controller
     }
 
     /**
-    * 全ユーザー情報の取得
+    * タイムラインの取得(フォローしているユーザーのツイートと自身のツイートを取得)
     * 
     * @return array
     */
