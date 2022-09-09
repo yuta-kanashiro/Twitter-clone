@@ -40,7 +40,7 @@ class UserController extends Controller
 
         return [
             'user' => $user,
-            'tweetLikes' => $user->likes()->with('user')->get(),
+            'tweetLikes' => $user->likes()->withPivot('created_at AS joined_at')->orderBy('joined_at', 'desc')->with('user')->get(),
             'loginUserId' => Auth::id(),
             'countFollowings' => $user->countFollowings(),
             'countFollowers' => $user->countFollowers(),

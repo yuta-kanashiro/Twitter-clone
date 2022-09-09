@@ -6,7 +6,7 @@
             <div id="content" class="container">
                 <div class="justify-content-center">
                     <div class="">
-                        <form id="editForm" enctype="multipart/form-data" @submit="updateUser">
+                        <form id="editForm" action="" method="" enctype="multipart/form-data">
                             <div class="form-group text-center">
                                 <label for="profile_image" class="mt-2">
                                     <div v-if="!loginUser.profile_image">
@@ -31,7 +31,7 @@
                                 <textarea type="text" class="form-control" id="profile_text" name="profile_text" :value="loginUser.profile_text" maxlength="120"></textarea>
                             </div>
                             <div class="d-flex justify-content-center mt-3">
-                                <button type="submit" id="editBtn" class="btn btn-outline-dark rounded-pill me-2">更新する</button>
+                                <button type="button" id="editBtn" class="btn btn-outline-dark rounded-pill me-2" @click="updateUser">更新する</button>
                                 <button type="button" class="btn btn-dark rounded-pill" @click="closeModal">閉じる</button>
                             </div>
                         </form>
@@ -69,25 +69,28 @@ export default {
         const previewImage = () => {
             const inputImage = document.getElementById('profile_image');
             preview.value = inputImage.files[0];
-            const fileReader = new FileReader();
-            
-            fileReader.onload = (e) => {
-                url.value = e.target.result;
-            };
-            fileReader.readAsDataURL(preview.value);
+
+            if (typeof preview.value != "undefined") {
+                if (preview.value.size > 10000000) {
+                    alert("ファイルサイズを10MB以下にしてください")
+                } else {
+                    url.value = URL.createObjectURL(preview.value);
+                }
+            }
         }
 
         // ユーザー情報を更新
         const updateUser = async () => {
             editBtn.disabled = true;
-            const loginUser = props.loginUser
+            const editForm  = document.getElementById('editForm')
             const userData = new FormData(editForm);
+
             try {
-                const response = await axios.post('/api/userProfile/update', userData)
-                loginUser.value = response.data
-                closeModal()
+                await axios.post('/api/userProfile/update', userData);
+                location.reload();
             } catch (error) {
                 alert("エラーが発生しました。")
+                editBtn.disabled = false;
             }
         }
 
@@ -105,7 +108,7 @@ export default {
 </script>
 <style>
 #overlay{
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 0;
     left: 0;
@@ -118,7 +121,7 @@ export default {
 }
 
 #content{
-    z-index: 2;
+    z-index: 3;
     padding: 1em;
     margin: 1em;
     max-width: 500px;
