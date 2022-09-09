@@ -11,7 +11,7 @@
                                 <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                             </div>
                             <div v-else>
-                                <!-- プロフィール画像編集機能追加後、ここに記述を追加 -->
+                                <img class="rounded-circle border" :src="loginUser.profile_image" alt="プロフィール画像" width="60" height="60">
                             </div>
                             <div class="mt-2">
                                 <textarea type="text" name="text" id="tweetText" class="form-control" placeholder="ツイートしてみよう" maxlength="140" rows="10" required></textarea>
@@ -41,7 +41,6 @@ export default {
         const getLoginUser = async () => {
             const response = await axios.get('/api/loginUser')
             loginUser.value = response.data
-            console.log(response.data)
         }
 
         // モーダルウィンドウを表示する
@@ -62,7 +61,6 @@ export default {
             try {
                 await axios.post('/api/createTweet', tweetData)
             } catch (error) {
-                console.log(error)
                 alert("エラーが発生しました。")
             }
         }

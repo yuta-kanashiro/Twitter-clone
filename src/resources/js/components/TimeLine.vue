@@ -10,7 +10,7 @@
                                     <img class="rounded-circle border" src="../img/default.png" alt="プロフィール画像" width="60" height="60">
                                 </div>
                                 <div v-else>
-                                    <!-- プロフィール画像編集機能追加後、ここに記述を追加 -->
+                                    <img class="rounded-circle border" :src="tweet.user.profile_image" alt="プロフィール画像" width="60" height="60">
                                 </div>
                             </router-link>
                         </div>
@@ -21,7 +21,7 @@
                                 <span class="text-muted ms-2">{{ format(tweet.created_at) }}</span>
                             </router-link>
                             <router-link :to="'/tweet/' + tweet.id" class="router-link">
-                                <span class="d-block">{{ tweet.text }}</span>
+                                <span class="d-block" style="white-space: pre-wrap;">{{ tweet.text }}</span>
                             </router-link>
                         </div>
                     </div>

@@ -90,7 +90,7 @@ class User extends Authenticatable
     */
     public function getUserInfo(int $id): User
     {
-        return $this->with('tweets')->find($id);
+        return $this->with('tweets', 'likes')->find($id);
     }
 
     // # フォローに関する処理
@@ -124,6 +124,25 @@ class User extends Authenticatable
     public function unfollow(int $followUserId)
     {
         $this->followings()->detach($followUserId);
+    }
+
+    /**
+    * フォローリスト
+    * 
+    * @param int $userId
+    * @return array
+    */
+    public function getFollowList(int $userId): array
+    {
+        $user = $this->find($userId);
+
+        $followingUsers = $user->whereIn('id', $user->followings()->pluck('follower_id'))->get();
+        $followerUsers = $user->whereIn('id', $user->followers()->pluck('following_id'))->get();
+
+        return [
+            'followingUsers' => $followingUsers,
+            'followerUsers' => $followerUsers
+        ];
     }
 
     /**
@@ -181,7 +200,17 @@ class User extends Authenticatable
     }
 
     /**
-     * ツイートー数カウント
+     * いいね数カウント
+     * 
+     * @return int
+     */
+    public function countLikes(): int
+    {
+        return $this->likes()->count();
+    }
+
+    /**
+     * ツイート数カウント
      * 
      * @return int
      */

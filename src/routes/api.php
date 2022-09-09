@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/usersList', [UserController::class, 'index']);
     // ユーザー詳細取得
     Route::get('/userProfile/{id}', [UserController::class, 'show']);
+    // ユーザー情報編集
+    Route::post('/userProfile/update', [UserController::class, 'update']);
     // ログインユーザー取得
     Route::get('/loginUser', [UserController::class, 'getLoginUser']);
 
@@ -38,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tweet/{id}', [TweetController::class, 'show']);
     // ツイート投稿
     Route::post('/createTweet', [TweetController::class, 'store']);
+    // ツイート削除
+    Route::post('/deleteTweet/{id}', [TweetController::class, 'destroy']);
 
     # フォロー関連のルーティング
     // フォロー判定

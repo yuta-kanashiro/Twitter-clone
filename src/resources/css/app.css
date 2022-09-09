@@ -26,6 +26,14 @@
     /* border: 2px solid transparent; */
 }
 
+.tab-menu button {
+    border: none;
+}
+
+.tab-menu button.active {
+    background: #d3d1d1;
+}
+
 .tweet-btn {
     position: fixed;
     right: 35px;

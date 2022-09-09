@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TweetRequest;
 use App\Models\Tweet;
-use Illuminate\Support\Collection;
 
 class TweetController extends Controller
 {
@@ -25,16 +24,11 @@ class TweetController extends Controller
      */
     public function show(int $tweetId): array
     {
-        $tweet = $this->tweet->getTweet($tweetId);
-        
-        return [
-            'tweet' => $tweet,
-            'countLikes' => $tweet->countLikes()
-        ];
+        return $this->tweet->getTweet($tweetId);
     }
 
     /**
-    * 全ユーザー情報の取得
+    * タイムラインの取得(フォローしているユーザーのツイートと自身のツイートを取得)
     * 
     * @return array
     */
@@ -44,13 +38,22 @@ class TweetController extends Controller
     }
 
     /**
-     * あるツイートを取得
+     * ツイート投稿
      *
      * @param TweetRequest $request
-     * @return Tweet
      */
-    public function store(TweetRequest $request): Tweet
+    public function store(TweetRequest $request)
     {
-        return $this->tweet->createTweet($request);
+        $this->tweet->createTweet($request);
+    }
+
+    /**
+     * ツイート削除
+     *
+     * @param int $tweetId
+     */
+    public function destroy(int $tweetId)
+    {
+        $this->tweet->deleteTweet($tweetId);
     }
 }

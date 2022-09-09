@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\FollowController;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +19,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'account_name' => 'sample1',
-                'user_name' => 'sample1sample1',
+                'user_name' => 'sample111',
                 'email' => 'sample1@sample.com',
                 'password' => bcrypt('sample1sample1'),
                 'profile_text' => 'みなさんこんにちは。僕の名前はsample1です。この文章は自己紹介のサンプルです。',

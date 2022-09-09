@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateRequest;
 use App\Models\User;
+use App\UseCase\User\UpdateAction;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,20 +40,33 @@ class UserController extends Controller
 
         return [
             'user' => $user,
+            'tweetLikes' => $user->likes()->withPivot('created_at AS joined_at')->orderBy('joined_at', 'desc')->with('user')->get(),
             'loginUserId' => Auth::id(),
             'countFollowings' => $user->countFollowings(),
             'countFollowers' => $user->countFollowers(),
-            'countTweets' => $user->countTweets()
+            'countTweets' => $user->countTweets(),
+            'countLikes' => $user->countLikes()
         ];
     }
 
     /**
-     * あるユーザーの情報の取得
-     *
-     * @return User
-     */
+    * ユーザー情報の編集
+    * 
+    * @param UpdateRequest $request
+    * @param UpdateAction $useCase
+    */
+    public function update(UpdateRequest $request, UpdateAction $useCase)
+    {
+        $useCase->update($request);
+    }
+
+    /**
+    * ログインユーザー情報の取得
+    * 
+    * @return User
+    */
     public function getLoginUser(): User
     {
-        return auth()->user();
+        return Auth::user();
     }
 }
